@@ -1,3 +1,4 @@
-# ignore environment variables
+# ignore plist files
 Scigic/GoogleService-Info.plist
-Info.plist
+Scigic/Info.plist
+

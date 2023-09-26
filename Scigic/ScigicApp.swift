@@ -14,11 +14,18 @@ struct ScigicApp: App {
     
     // Add updater manager
     @ObservedObject private var updaterManager = UpdaterManager()
+    @EnvironmentObject var webSocketService: WebSocketService
     
     init() {
         FirebaseApp.configure()
         
-        updaterManager.startUpdater()
+        // Create a strong reference to updaterManager
+        let updater = self.updaterManager
+        
+        // Offload potentially long-running tasks to a background thread
+        DispatchQueue.global(qos: .background).async {
+            updater.startUpdater()
+        }
     }
 
     var body: some Scene {
@@ -35,6 +42,7 @@ struct ScigicApp: App {
 
             Divider()
             Button("Disable") {
+                webSocketService.disconnect()
                 NSApplication.shared.terminate(nil)
             }
         }

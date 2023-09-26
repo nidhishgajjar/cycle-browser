@@ -13,7 +13,7 @@ struct ContentView: View {
 
     var body: some View {
         Group {
-            if authManager.isUserLoggedIn {
+            if authManager.isUserLoggedIn && webSocketService.hasActiveSubscription {
                 HomeView()
             }
             else {

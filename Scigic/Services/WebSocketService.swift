@@ -7,6 +7,9 @@ import Foundation
 
 class WebSocketService: ObservableObject {
     @Published var isConnected: Bool = false
+    @Published var hasActiveSubscription: Bool = false
+    private var subscriptionCheckTimer: Timer?
+    private var pongReceived: Bool = true
 
     
     // Define a Message struct to hold the content and type of each message.
@@ -23,24 +26,33 @@ class WebSocketService: ObservableObject {
     private var webSocketTask: URLSessionWebSocketTask?
     private var urlSession: URLSession?
     private var authManager: AuthManager
+    private var healthCheckTimer: Timer?
 
     init(authManager: AuthManager) {
         self.authManager = authManager
     }
 
     func connect() {
-       guard let currentUserUID = authManager.currentUserUID else { return }
-
-       let url = URL(string: "wss://scigic-neo-cortex.onrender.com/websocket/\(currentUserUID)")!
+//       guard let currentUserUID = authManager.currentUserUID else { return }
+//
+//       let url = URL(string: "wss://scigic-neo-cortex.onrender.com/websocket/\(currentUserUID)")!
 //       let url = URL(string: "ws://localhost:8000/websocket/12345")!
         
-       webSocketTask = URLSession.shared.webSocketTask(with: url)
-       webSocketTask?.resume()
+//       webSocketTask = URLSession.shared.webSocketTask(with: url)
+//       webSocketTask?.resume()
 
-       // Set isConnected to true.
-       isConnected = true
+        // Set isConnected to true.
+       DispatchQueue.main.async {
+          guard let currentUserUID = self.authManager.currentUserUID else { return }
+          let url = URL(string: "wss://scigic-neo-cortex.onrender.com/websocket/\(currentUserUID)")!
 
-       listen()
+          self.webSocketTask = URLSession.shared.webSocketTask(with: url)
+          self.webSocketTask?.resume()
+          self.isConnected = true
+          self.listen()
+          self.startHealthCheckTimer()
+       }
+        
    }
 
     func listen() {
@@ -49,9 +61,13 @@ class WebSocketService: ObservableObject {
             case .failure(let error):
                 print("WebSocket receive failed with error \(error)")
                 DispatchQueue.main.async {
-                    // Your UI updates or changes go here
                     self?.isConnected = false
+                    // Try to reconnect after a delay
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 1) {
+                        self?.connect()
+                    }
                 }
+
                 
             case .success(let message):
                 switch message {
@@ -80,23 +96,78 @@ class WebSocketService: ObservableObject {
             }
         })
     }
+    
+    
+    func startHealthCheckTimer() {
+        healthCheckTimer?.invalidate()
+        healthCheckTimer = Timer.scheduledTimer(withTimeInterval: 45, repeats: true) { [weak self] _ in
+            self?.checkHealthEndpoint()
+        }
+    }
+
+    
+    private func checkHealthEndpoint() {
+        let url = URL(string: "https://scigic-neo-cortex.onrender.com/health")!
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            if let error = error {
+                print("Failed to hit health endpoint: \(error)")
+                DispatchQueue.main.async {
+                    self?.isConnected = false
+                    // Try to reconnect after a delay
+                    DispatchQueue.global().asyncAfter(deadline: .now() + 5) {
+                        self?.connect()
+                    }
+                }
+            }
+        }
+        task.resume()
+    }
+    
+    
+    func checkSubscriptionStatus() {
+        guard let clientId = authManager.currentUserUID else { return }
+         let url = URL(string: "https://scigic-neo-cortex.onrender.com/account/subscription/\(clientId)")!
+//        let url = URL(string: "http://localhost:8000/account/subscription/46789")!
+        
+        let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
+            if let error = error {
+                print("Failed to check subscription status: \(error)")
+                return
+            }
+
+            if let data = data, let responseString = String(data: data, encoding: .utf8) {
+                let isActive = (responseString == "true")
+                DispatchQueue.main.async {
+                    self?.hasActiveSubscription = isActive
+                }
+            }
+        }
+        task.resume()
+    }
+
+    
+    
+    func startSubscriptionCheckTimer() {
+          subscriptionCheckTimer?.invalidate()
+          subscriptionCheckTimer = Timer.scheduledTimer(withTimeInterval: 86400.0, repeats: true) { [weak self] _ in
+              self?.checkSubscriptionStatus()
+          }
+      }
+
+
+
 
 
     func disconnect() {
         webSocketTask?.cancel(with: .normalClosure, reason: nil)
 
-        // Set isConnected to false.
-        isConnected = false
-    }
-    
-    
-    func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didOpenWithProtocol protocol: String?) {
-        self.isConnected = true // Connection successful
-    }
+        DispatchQueue.main.async {
+            self.isConnected = false
+            self.healthCheckTimer?.invalidate()
+        }
 
-    func urlSession(_ session: URLSession, webSocketTask: URLSessionWebSocketTask, didCloseWith closeCode: URLSessionWebSocketTask.CloseCode, reason: Data?) {
-        self.isConnected = false // Connection lost or closed
     }
+    
     
     
     func send(slateUUID: String, mindRequest: [String: Any], reqType: String) {

@@ -137,7 +137,7 @@ struct SlateView: View {
                         }
                         .keyboardShortcut(KeyEquivalent("\\"), modifiers: .command)
                         .padding(EdgeInsets(top: 0, leading: -40, bottom: 0, trailing: 0))
-                        .opacity((slateManager.slates.count < 2) ? 0 : 1)
+                        .opacity((slateManager.slates.count < 2 || (!commonContext.shouldMoveCurrentSlateToLast && currentSlate.wrappedValue != slateManager.slates.count - 1)) ? 0 : 1)
                         .onHover{
                             hovering in
                                 switchClosSlateIcon = hovering

@@ -43,7 +43,7 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         self.webSocketService = webSocket
 //        self.passwordManagerService = passwordManager
         super.init()
-        let scigicClip = URL(string: "https://scigic.com")!
+        let scigicClip = URL(string: "https://scigic.com/scigicindex0")!
         addNewSlate(url: scigicClip)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSApplication.willResignActiveNotification, object: nil)
@@ -95,7 +95,7 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .nameTypeOrLexicalClass, options: options) { tag, range in
             if let tag = tag {
                 switch tag {
-                case .personalName, .placeName, .organizationName, .noun, .pronoun:
+                case .personalName, .placeName, .organizationName, .noun:
                     hasEntity = true
                     return false
                 default:
@@ -187,7 +187,7 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
                 print(count)
                 print(hasEntity)
                 
-                if count < 5 && hasEntity {
+                if count < 5 && hasEntity && unstated {
                     self.closeCurrentSlate()
                     addWebSearchSlate(query: request)
 

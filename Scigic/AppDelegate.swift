@@ -8,6 +8,7 @@
 import SwiftUI
 import HotKey
 import AppKit
+import Combine
 
 class AppDelegate: NSObject, NSApplicationDelegate {
     var authManager: AuthManager!
@@ -20,6 +21,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var webSocketService: WebSocketService!
 //    var passwordManagerService: PasswordManagerService
     var autoSuggestViewModel: AutoSuggestViewModel
+    private var loginStatusCancellable: AnyCancellable?
+
 
     override init() {
         authManager = AuthManager()
@@ -31,9 +34,27 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         self.slateManager = SlateManagerViewModel(context: commonContext, webSocket: webSocketService)
         
         
+        
+        
         super.init()
         hotKeyViewModel = ShortcutViewModel(toggleWindow: toggleMainWindow)
+        
+        loginStatusCancellable = authManager.$isUserLoggedIn
+            .filter { $0 == true } // Only proceed when the user logs in
+            .sink { [weak self] _ in
+                self?.webSocketService.checkSubscriptionStatus() // Replace with the actual method name
+                self?.webSocketService.startSubscriptionCheckTimer()
+                self?.webSocketService.startHealthCheckTimer()
+                self?.webSocketService.connect()
+            }
+
     }
+    
+    
+    deinit {
+        loginStatusCancellable?.cancel()
+    }
+
     
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         
@@ -63,8 +84,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         if !mainWindow.isVisible {
-               // Show mainWindow
-               toggleMainWindow()
+            webSocketService.checkSubscriptionStatus()
+            // Show mainWindow
+            toggleMainWindow()
         }
         
         
@@ -114,6 +136,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+    
 
 
 

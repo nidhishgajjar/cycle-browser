@@ -78,6 +78,14 @@ struct MultilineTextField: NSViewRepresentable {
             parent.commonContext.askTextFromPalette = ""
         }
         
+        
+        func isValidWebsiteName(_ string: String) -> Bool {
+            // Regular expression to match website name + TLD
+            let pattern = "^[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)+$"
+            let regex = try? NSRegularExpression(pattern: pattern)
+            return regex?.firstMatch(in: string, options: [], range: NSRange(location: 0, length: string.count)) != nil
+        }
+        
 
         func textView(_ textView: NSTextView, doCommandBy commandSelector: Selector) -> Bool {
             if commandSelector == #selector(NSResponder.insertNewline(_:)) {
@@ -88,10 +96,24 @@ struct MultilineTextField: NSViewRepresentable {
                     let trimmedText = textView.string.trimmingCharacters(in: .whitespacesAndNewlines)
                     if trimmedText.isEmpty { return false }
 
-                    if trimmedText.hasPrefix("https://") || trimmedText.hasPrefix("http://") {
-                        if let url = URL(string: trimmedText) {
+//                    if trimmedText.hasPrefix("https://") || trimmedText.hasPrefix("http://") {
+//                        if let url = URL(string: trimmedText) {
+//                            parent.slateManager.addNewSlate(url: url)
+//                        }
+//                        
+//                    } 
+                    
+                    if trimmedText.hasPrefix("https://") || trimmedText.hasPrefix("http://") || isValidWebsiteName(trimmedText) {
+                        if !trimmedText.hasPrefix("https://") && !trimmedText.hasPrefix("http://") {
+                            // If it's just a website name + TLD, prepend "https://"
+                            let urlString = "https://" + trimmedText
+                            if let url = URL(string: urlString) {
+                                parent.slateManager.addNewSlate(url: url)
+                            }
+                        } else if let url = URL(string: trimmedText) {
                             parent.slateManager.addNewSlate(url: url)
                         }
+                        
                         
                     } else {
                         if (NSApp.currentEvent?.modifierFlags.contains(.shift)) ?? false {

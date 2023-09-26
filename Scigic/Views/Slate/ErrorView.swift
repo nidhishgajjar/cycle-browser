@@ -75,7 +75,7 @@ struct ErrorView: View {
                     
                     Button(action: {
                         slateManager.addNewSlate(humanAGIRequest: errorCopyText, unstated: false)
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
                             slateManager.closeSlate(with: slateUUID)
                         }
                     }) {
