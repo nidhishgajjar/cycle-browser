@@ -42,10 +42,19 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         loginStatusCancellable = authManager.$isUserLoggedIn
             .filter { $0 == true } // Only proceed when the user logs in
             .sink { [weak self] _ in
-                self?.webSocketService.checkSubscriptionStatus() // Replace with the actual method name
-                self?.webSocketService.startSubscriptionCheckTimer()
-                self?.webSocketService.startHealthCheckTimer()
-                self?.webSocketService.connect()
+//                self?.webSocketService.checkSubscriptionStatus() // Replace with the actual method name
+//                self?.webSocketService.startSubscriptionCheckTimer()
+//                self?.webSocketService.startHealthCheckTimer()
+//                self?.webSocketService.connect()
+                
+                DispatchQueue.global(qos: .background).async {
+                    self?.webSocketService.checkSubscriptionStatus()
+                    self?.webSocketService.startSubscriptionCheckTimer()
+                    self?.webSocketService.startHealthCheckTimer()
+                    self?.webSocketService.connect()
+                }
+
+
             }
 
     }

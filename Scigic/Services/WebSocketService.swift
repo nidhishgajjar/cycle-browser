@@ -67,32 +67,34 @@ class WebSocketService: ObservableObject {
                         self?.connect()
                     }
                 }
-
+                
                 
             case .success(let message):
-                switch message {
-                case .string(let text):
-                    // Assuming the text is a JSON string, parse it into a dictionary.
-                    let data = Data(text.utf8)
-                    if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
-                       let dict = jsonObject as? [String: Any],
-                       let id = dict["id"] as? String,
-                       let slateUUID = dict["slateUUID"] as? String,
-                       let mindResponse = dict["mindResponse"] as? [String: Any],
-                       let respType = dict["respType"] as? String {
-                        // Create a new Message and publish it.
-                        let message = Message(id: id, slateUUID: slateUUID, mindResponse: mindResponse, respType: respType)
-                        DispatchQueue.main.async { // Make sure to publish on the main thread
-                            self?.messagePublisher.send(message)
+                DispatchQueue.global().async { [weak self] in
+                    switch message {
+                    case .string(let text):
+                        // Assuming the text is a JSON string, parse it into a dictionary.
+                        let data = Data(text.utf8)
+                        if let jsonObject = try? JSONSerialization.jsonObject(with: data, options: []),
+                           let dict = jsonObject as? [String: Any],
+                           let id = dict["id"] as? String,
+                           let slateUUID = dict["slateUUID"] as? String,
+                           let mindResponse = dict["mindResponse"] as? [String: Any],
+                           let respType = dict["respType"] as? String {
+                            // Create a new Message and publish it.
+                            let message = Message(id: id, slateUUID: slateUUID, mindResponse: mindResponse, respType: respType)
+                            DispatchQueue.main.async { // Make sure to publish on the main thread
+                                self?.messagePublisher.send(message)
+                            }
                         }
+                    case .data(let data):
+                        print("Received binary message: \(data)")
+                    @unknown default:
+                        fatalError("Unknown message type")
                     }
-                case .data(let data):
-                    print("Received binary message: \(data)")
-                @unknown default:
-                    fatalError("Unknown message type")
+                    
+                    self?.listen()
                 }
-
-                self?.listen()
             }
         })
     }
@@ -171,18 +173,20 @@ class WebSocketService: ObservableObject {
     
     
     func send(slateUUID: String, mindRequest: [String: Any], reqType: String) {
-        let messageDict: [String: Any] = ["slateUUID": slateUUID, "reqType": reqType]
-        var finalMessageDict = messageDict
-        finalMessageDict["mindRequest"] = mindRequest
-
-        if let data = try? JSONSerialization.data(withJSONObject: finalMessageDict, options: []),
-           let text = String(data: data, encoding: .utf8) {
-            let message = URLSessionWebSocketTask.Message.string(text)
-            webSocketTask?.send(message, completionHandler: { error in
-                if let error = error {
-                    print("WebSocket failed to send message with error \(error)")
-                }
-            })
+        DispatchQueue.global().async {
+            let messageDict: [String: Any] = ["slateUUID": slateUUID, "reqType": reqType]
+            var finalMessageDict = messageDict
+            finalMessageDict["mindRequest"] = mindRequest
+            
+            if let data = try? JSONSerialization.data(withJSONObject: finalMessageDict, options: []),
+               let text = String(data: data, encoding: .utf8) {
+                let message = URLSessionWebSocketTask.Message.string(text)
+                self.webSocketTask?.send(message, completionHandler: { error in
+                    if let error = error {
+                        print("WebSocket failed to send message with error \(error)")
+                    }
+                })
+            }
         }
     }
 } 

@@ -113,17 +113,32 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
     
     
     func sendWebSocketMessage(slateUUID: UUID, request: String, unstated: Bool) {
-        if !webSocketService.isConnected {
-            webSocketService.connect()
+//        if !webSocketService.isConnected {
+//            webSocketService.connect()
+//        }
+//
+//        if unstated {
+//            let mindRequest: [String: Any] = ["askText": request]
+//            webSocketService.send(slateUUID: slateUUID.uuidString, mindRequest: mindRequest, reqType: "unstatedAsk")
+//        } else {
+//            let mindRequest: [String: Any] = ["askText": request]
+//            webSocketService.send(slateUUID: slateUUID.uuidString, mindRequest: mindRequest, reqType: "ask")
+//        }
+        DispatchQueue.global(qos: .background).async {
+            if !self.webSocketService.isConnected {
+                self.webSocketService.connect()
+            }
+
+            if unstated {
+                let mindRequest: [String: Any] = ["askText": request]
+                self.webSocketService.send(slateUUID: slateUUID.uuidString, mindRequest: mindRequest, reqType: "unstatedAsk")
+            } else {
+                let mindRequest: [String: Any] = ["askText": request]
+                self.webSocketService.send(slateUUID: slateUUID.uuidString, mindRequest: mindRequest, reqType: "ask")
+            }
         }
 
-        if unstated {
-            let mindRequest: [String: Any] = ["askText": request]
-            webSocketService.send(slateUUID: slateUUID.uuidString, mindRequest: mindRequest, reqType: "unstatedAsk")
-        } else {
-            let mindRequest: [String: Any] = ["askText": request]
-            webSocketService.send(slateUUID: slateUUID.uuidString, mindRequest: mindRequest, reqType: "ask")
-        }
+
     }
 
 

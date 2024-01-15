@@ -10,20 +10,22 @@ import Sparkle
 
 @main
 struct ScigicApp: App {
-    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
+    
+    @EnvironmentObject var webSocketService: WebSocketService
     
     // Add updater manager
     @ObservedObject private var updaterManager = UpdaterManager()
-    @EnvironmentObject var webSocketService: WebSocketService
+    
+    @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     
     init() {
-        FirebaseApp.configure()
         
         // Create a strong reference to updaterManager
         let updater = self.updaterManager
         
         // Offload potentially long-running tasks to a background thread
         DispatchQueue.global(qos: .background).async {
+            FirebaseApp.configure()
             updater.startUpdater()
         }
     }
@@ -31,10 +33,14 @@ struct ScigicApp: App {
     var body: some Scene {
         MenuBarExtra("", systemImage: "circle.dotted") {
             Button("Scigic") {
-                appDelegate.toggleMainWindow()
+                DispatchQueue.global(qos: .background).async {
+                    appDelegate.toggleMainWindow()
+                }
             }
             Button("Settings") {
-                appDelegate.showSettingsWindow()
+                DispatchQueue.global(qos: .background).async {
+                    appDelegate.showSettingsWindow()
+                }
             }
             
             // Add CheckForUpdatesView
@@ -42,14 +48,8 @@ struct ScigicApp: App {
 
             Divider()
             Button("Disable") {
-                webSocketService.disconnect()
                 NSApplication.shared.terminate(nil)
             }
         }
     }
 }
-
-
-
-
-
