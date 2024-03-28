@@ -32,7 +32,7 @@ struct AskScigicButton: View {
     var body: some View {
         Button(action: {
             slateManager.closeCurrentSlate()
-            slateManager.addNewSlate(humanAGIRequest: extractedQuery, unstated: false)
+            slateManager.addPerlexitySlate(query: extractedQuery)
         }) {
             HStack {
                 Group {
@@ -42,7 +42,7 @@ struct AskScigicButton: View {
                             .lineLimit(1)
                             .padding(.leading, 8)
                     } else {
-                        Text("Ask Scigic")
+                        Text("Ask Perplexity")
                     }
                 }
             }

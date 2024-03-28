@@ -13,27 +13,27 @@ struct IdentifiableParserResult: Identifiable {
 }
 
 
-class Job: ObservableObject, Identifiable {
-    @Published var slateUUID: UUID
-    @Published var userInput: String
-    @Published var progress: Double {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-    @Published var isCompleted: Bool {
-        willSet {
-            objectWillChange.send()
-        }
-    }
-
-    init(slateUUID: UUID, userInput: String, progress: Double, isCompleted: Bool) {
-        self.slateUUID = slateUUID
-        self.userInput = userInput
-        self.progress = progress
-        self.isCompleted = isCompleted
-    }
-}
+//class Job: ObservableObject, Identifiable {
+////    @Published var slateUUID: UUID
+//    @Published var userInput: String
+//    @Published var progress: Double {
+//        willSet {
+//            objectWillChange.send()
+//        }
+//    }
+//    @Published var isCompleted: Bool {
+//        willSet {
+//            objectWillChange.send()
+//        }
+//    }
+//
+//    init(slateUUID: UUID, userInput: String, progress: Double, isCompleted: Bool) {
+//        self.slateUUID = slateUUID
+//        self.userInput = userInput
+//        self.progress = progress
+//        self.isCompleted = isCompleted
+//    }
+//}
 
 class Interface: ObservableObject, Identifiable {
     @Published var slateUUID: UUID
@@ -126,23 +126,21 @@ class ContextViewModel: ObservableObject {
     
 //  ClipView States
     struct Clip {
-        let name: String
         let url: URL
-        let icon: NSImage? // or UIImage in iOS
         var slateUUID: UUID?
     }
     
     @Published var clips = [
-        Clip(name: "ChatGPT", url: URL(string: "https://chat.openai.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Github", url: URL(string: "https://github.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Twitter", url: URL(string: "https://twitter.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Figma", url: URL(string: "https://figma.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Pinterest", url: URL(string: "https://pinterest.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Youtube", url: URL(string: "https://youtube.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Docs", url: URL(string: "https://docs.google.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Slack", url: URL(string: "https://slack.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Notion", url: URL(string: "https://notion.com")!, icon: nil, slateUUID: nil),
-        Clip(name: "Gmail", url: URL(string: "https://mail.google.com")!, icon: nil, slateUUID: nil),
+        Clip(url: URL(string: "https://chat.openai.com")!, slateUUID: nil),
+        Clip(url: URL(string: "https://notion.so")!, slateUUID: nil),
+        Clip(url: URL(string: "https://twitter.com")!,  slateUUID: nil),
+        Clip(url: URL(string: "https://app.slack.com/client/T06RQBSP7TM/D06S35D0R33")!, slateUUID: nil),
+        Clip(url: URL(string: "https://pinterest.com")!, slateUUID: nil),
+        Clip(url: URL(string: "https://vercel.com")!, slateUUID: nil),
+        Clip(url: URL(string: "https://youtube.com")!, slateUUID: nil),
+        Clip(url: URL(string: "https://firebase.google.com")!, slateUUID: nil),
+        Clip(url: URL(string: "https://render.com")!,  slateUUID: nil),
+        Clip(url: URL(string: "https://github.com/nidhishgajjar?tab=repositories")!, slateUUID: nil),
     ]
     
 //  AGIInstinctSlateView State and func
@@ -176,18 +174,18 @@ class ContextViewModel: ObservableObject {
     }
     
 //  Jobs States and funcs
-    @Published var jobs: [Job] = []
+//    @Published var jobs: [Job] = []
     @Published var NewJobCreated: Bool = false
     
-    func removeJob(slateUUID: UUID) {
-        if let index = jobs.firstIndex(where: { $0.slateUUID == slateUUID }) {
-            jobs.remove(at: index)
-        }
-    }
-
-    func removeAllCompletedJobs() {
-          jobs.removeAll(where: { $0.isCompleted })
-    }
+//    func removeJob(slateUUID: UUID) {
+//        if let index = jobs.firstIndex(where: { $0.slateUUID == slateUUID }) {
+//            jobs.remove(at: index)
+//        }
+//    }
+//
+//    func removeAllCompletedJobs() {
+//          jobs.removeAll(where: { $0.isCompleted })
+//    }
 
     
 //  Mind Response distribution system
@@ -233,13 +231,13 @@ class ContextViewModel: ObservableObject {
                 
             }
             
-        case "introspection":
-            if let userInput = message.mindResponse["userInput"] as? String,
-               jobs.firstIndex(where: { $0.slateUUID == slateUUID }) == nil {
-                let newJob = Job(slateUUID: slateUUID, userInput: userInput, progress: 0, isCompleted: false)
-                jobs.append(newJob)
-                self.NewJobCreated = true
-            }
+//        case "introspection":
+//            if let userInput = message.mindResponse["userInput"] as? String,
+//               jobs.firstIndex(where: { $0.slateUUID == slateUUID }) == nil {
+//                let newJob = Job(slateUUID: slateUUID, userInput: userInput, progress: 0, isCompleted: false)
+//                jobs.append(newJob)
+//                self.NewJobCreated = true
+//            }
             
         case "knowledege-gap":
             interface.showHumanApprovalView = false
@@ -292,25 +290,25 @@ class ContextViewModel: ObservableObject {
             }
 
 
-        case "task-progress":
-            if let progress = message.mindResponse["progress"] as? Double,
-               let jobIndex = jobs.firstIndex(where: { $0.slateUUID == slateUUID }) {
-                // Create a copy of the job and modify the progress
-                let updatedJob = jobs[jobIndex]
-                updatedJob.progress = progress
-                if progress >= 100 {
-                    updatedJob.isCompleted = true
-                    interface.showDeduceView = false
-                    interface.showInstinctsView = false
-                    interface.showKnowledgeGapView = false
-                    interface.showHumanApprovalView = false
-                }
-                // Replace the job at the same index with the updated job
-                var updatedJobs = jobs
-                updatedJobs[jobIndex] = updatedJob
-                // Replace the entire array
-                jobs = updatedJobs
-            }
+//        case "task-progress":
+//            if let progress = message.mindResponse["progress"] as? Double,
+//               let jobIndex = jobs.firstIndex(where: { $0.slateUUID == slateUUID }) {
+//                // Create a copy of the job and modify the progress
+//                let updatedJob = jobs[jobIndex]
+//                updatedJob.progress = progress
+//                if progress >= 100 {
+//                    updatedJob.isCompleted = true
+//                    interface.showDeduceView = false
+//                    interface.showInstinctsView = false
+//                    interface.showKnowledgeGapView = false
+//                    interface.showHumanApprovalView = false
+//                }
+//                // Replace the job at the same index with the updated job
+//                var updatedJobs = jobs
+//                updatedJobs[jobIndex] = updatedJob
+//                // Replace the entire array
+//                jobs = updatedJobs
+//            }
         default:
             break
         }

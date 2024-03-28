@@ -93,7 +93,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         if !mainWindow.isVisible {
-            webSocketService.checkSubscriptionStatus()
+//            DispatchQueue.global(qos: .background).async {
+//                self.webSocketService.checkSubscriptionStatus()
+//            }
             // Show mainWindow
             toggleMainWindow()
         }
@@ -122,6 +124,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func toggleMainWindow() {
         if let mainWindow = self.mainWindow {
             NSApp.activate(ignoringOtherApps: true)
+            
 
             let mouseLocation = NSEvent.mouseLocation
             let activeScreen = NSScreen.screens.first { NSMouseInRect(mouseLocation, $0.frame, false) } ?? NSScreen.main!
@@ -145,6 +148,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             }
         }
     }
+
+
+
     
 
 

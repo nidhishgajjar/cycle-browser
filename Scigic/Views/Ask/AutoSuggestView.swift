@@ -119,7 +119,7 @@ struct AutoSuggestView: View {
         if isURLFormat(suggestion), let url = URL(string: suggestion) {
             slateManager.addNewSlate(url: url)
         } else {
-            slateManager.addWebSearchSlate(query: suggestion)
+            slateManager.addPerlexitySlate(query: suggestion)
         }
         
         commonContext.askBarFocusedOnAGI.toggle()

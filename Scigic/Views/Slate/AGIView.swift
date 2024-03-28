@@ -13,13 +13,14 @@ struct AGIView: View {
         Group {
             if interface.showInstinctsView {
                 AGIInstinctView(slateUUID: interface.slateUUID, humanAGIRequest: humanAGIRequest)
-            } else if interface.showKnowledgeGapView {
-                AGIKnowledgeGapView()
-            } else if interface.showHumanApprovalView {
-                AGIHumanApprovalView(slateUUID: interface.slateUUID)
-            } else if interface.showDeduceView {
-                AGIDeduceView(slateUUID: interface.slateUUID, humanAGIRequest: humanAGIRequest)
-            }
+            } 
+//            else if interface.showKnowledgeGapView {
+//                AGIKnowledgeGapView()
+//            } else if interface.showHumanApprovalView {
+//                AGIHumanApprovalView(slateUUID: interface.slateUUID)
+//            } else if interface.showDeduceView {
+//                AGIDeduceView(slateUUID: interface.slateUUID, humanAGIRequest: humanAGIRequest)
+//            }
         }
     }
 }

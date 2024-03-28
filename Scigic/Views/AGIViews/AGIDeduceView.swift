@@ -150,7 +150,8 @@ struct AGIDeduceView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                         
                         Button(action: {
-                            slateManager.addNewSlate(url: URL(string: outcome.url ?? "https://google.com"))
+//                            slateManager.addNewSlate(url: URL(string: outcome.url ?? "https://google.com"))
+                            slateManager.addGoogleSearchSlate(query: "constitute ai")
                         }) {
                             Text("Open in Slate")
                                 .font(.system(size:13))

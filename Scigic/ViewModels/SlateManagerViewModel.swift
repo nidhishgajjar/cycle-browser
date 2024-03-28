@@ -43,7 +43,7 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         self.webSocketService = webSocket
 //        self.passwordManagerService = passwordManager
         super.init()
-        let scigicClip = URL(string: "https://scigic.com/scigicindex0")!
+        let scigicClip = URL(string: "https://constitute.ai")!
         addNewSlate(url: scigicClip)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSApplication.willResignActiveNotification, object: nil)
@@ -95,7 +95,7 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         tagger.enumerateTags(in: text.startIndex..<text.endIndex, unit: .word, scheme: .nameTypeOrLexicalClass, options: options) { tag, range in
             if let tag = tag {
                 switch tag {
-                case .personalName, .placeName, .organizationName, .noun:
+                case .personalName, .placeName, .organizationName, .noun, .pronoun:
                     hasEntity = true
                     return false
                 default:
@@ -195,26 +195,65 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         currentSlateIndex = slates.count - 1
         
         // WebSocket message
-        if let request = humanAGIRequest, !request.isEmpty {
-                let count = wordCount(request)
-                let hasEntity = containsEntity(in: request)
-            
-                print(count)
-                print(hasEntity)
-                
-                if count < 5 && hasEntity && unstated {
-                    self.closeCurrentSlate()
-                    addWebSearchSlate(query: request)
-
-                } else {
-                    self.sendWebSocketMessage(slateUUID: slateUUID, request: request, unstated: unstated)
-                }
-        }
+//        if let request = humanAGIRequest, !request.isEmpty {
+//                let count = wordCount(request)
+//                let hasEntity = containsEntity(in: request)
+//            
+//                print(count)
+//                print(hasEntity)
+//                
+//                if count < 5 && hasEntity && unstated {
+////                    self.closeCurrentSlate()
+//                    addPerlexitySlate(query: request)
+//
+//                } else {
+//                    self.sendWebSocketMessage(slateUUID: slateUUID, request: request, unstated: unstated)
+//                }
+//        }
     }
     
 
     
-    func addWebSearchSlate(query: String, searchEngine: String? = nil) {
+    func addPerlexitySlate(query: String, searchEngine: String? = nil) {
+        let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
+        if trimmedText.isEmpty { return }
+        
+//        print(slates)
+        
+        
+        let count = wordCount(trimmedText)
+        let hasEntity = containsEntity(in: trimmedText)
+    
+        print(count)
+        print(hasEntity)
+        
+        if count < 5 && hasEntity {
+//            self.closeCurrentSlate()
+            addGoogleSearchSlate(query: trimmedText)
+
+        } else {
+            
+            // Check for an existing Google search slate using the currentUrl key
+            if let existingGoogleSearchSlate = slates.first(where: { $0.currentUrl?.host == "www.perplexity.ai" && $0.currentUrl?.path == "/search" }) {
+                
+                // Replace the query for that slate's URL
+                let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                if let newSearchURL = URL(string: "https://www.perplexity.ai/search?q=\(searchString)") {
+                    existingGoogleSearchSlate.webView?.load(URLRequest(url: newSearchURL))
+                }
+                
+                // Jump to that slate
+                jumpToSlate(with: existingGoogleSearchSlate.slateUUID)
+            } else {
+                // If no existing Google search slate was found, then add a new slate as originally done
+                let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                let searchURL = URL(string: "https://www.perplexity.ai/search?q=\(searchString)")!
+                addNewSlate(url: searchURL)
+            }
+        }
+    }
+    
+    func addGoogleSearchSlate(query: String, searchEngine: String? = nil) {
         let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedText.isEmpty { return }
         
@@ -238,6 +277,44 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
             addNewSlate(url: searchURL)
         }
     }
+    
+    
+//    func addPerlexitySlate(query: String, searchEngine: String? = nil) {
+//        let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
+//        if trimmedText.isEmpty { return }
+//
+//        let count = wordCount(trimmedText)
+//        let hasEntity = containsEntity(in: trimmedText)
+//
+//        if count < 5 && hasEntity {
+////            self.closeCurrentSlate()
+//            addGoogleSearchSlate(query: trimmedText)
+//        } else {
+//            processSearchSlate(trimmedText: trimmedText, host: "www.perplexity.ai", path: "/search", baseSearchURL: "https://www.perplexity.ai/search?q=")
+//        }
+//    }
+//
+//    func addGoogleSearchSlate(query: String, searchEngine: String? = nil) {
+//        let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
+//        if trimmedText.isEmpty { return }
+//
+//        processSearchSlate(trimmedText: trimmedText, host: "www.google.com", path: "/search", baseSearchURL: "https://www.google.com/search?q=")
+//    }
+//
+//    func processSearchSlate(trimmedText: String, host: String, path: String, baseSearchURL: String) {
+//        if let existingSearchSlate = slates.first(where: { $0.currentUrl?.host == host && $0.currentUrl?.path == path }) {
+//            let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+//            if let newSearchURL = URL(string: "\(baseSearchURL)\(searchString)") {
+//                existingSearchSlate.webView?.load(URLRequest(url: newSearchURL))
+//            }
+//            jumpToSlate(with: existingSearchSlate.slateUUID)
+//        } else {
+//            let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+//            let searchURL = URL(string: "\(baseSearchURL)\(searchString)")!
+//            addNewSlate(url: searchURL)
+//        }
+//    }
+
 
 
   

@@ -30,7 +30,7 @@ struct ErrorView: View {
 
             VStack(alignment: .leading) {
                 
-                Text("Copy text, ask scigic again or search your request manually")
+                Text("Copy text, ask perplexity again or search your request with google. Using commad + enter")
                     .font(.system(size: 16))
                     .italic()
                     .padding(.top, 5)
@@ -74,7 +74,7 @@ struct ErrorView: View {
                     .buttonStyle(PlainButtonStyle())
                     
                     Button(action: {
-                        slateManager.addNewSlate(humanAGIRequest: errorCopyText, unstated: false)
+                        slateManager.addGoogleSearchSlate(query: errorCopyText)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
                             slateManager.closeSlate(with: slateUUID)
                         }
@@ -91,7 +91,7 @@ struct ErrorView: View {
 
                     
                     Button(action: {
-                        slateManager.addWebSearchSlate(query: errorCopyText)
+                        slateManager.addPerlexitySlate(query: errorCopyText)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
                             slateManager.closeSlate(with: slateUUID)
                         }

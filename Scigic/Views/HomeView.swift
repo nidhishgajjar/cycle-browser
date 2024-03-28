@@ -18,10 +18,10 @@ struct HomeView: View {
             // Always show the SlateView
             SlateView()
             
-            if commonContext.isPopVisible {
-                PopView()
-                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 39))
-            }
+//            if commonContext.isPopVisible {
+//                PopView()
+//                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 39))
+//            }
             
 
             // Conditionally show the AskView

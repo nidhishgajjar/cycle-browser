@@ -44,9 +44,9 @@ struct AGIInstinctView: View {
     }
 
 
-    func jobExistsForCurrentSlate() -> Bool {
-        return commonContext.jobs.first(where: { $0.slateUUID == slateUUID }) != nil
-    }
+//    func jobExistsForCurrentSlate() -> Bool {
+//        return commonContext.jobs.first(where: { $0.slateUUID == slateUUID }) != nil
+//    }
 
     var body: some View {
         ZStack {
@@ -92,7 +92,7 @@ struct AGIInstinctView: View {
                             
                             Button(action: {
                                 slateManager.closeCurrentSlate()
-                                slateManager.addWebSearchSlate(query: humanAGIRequest)
+                                slateManager.addPerlexitySlate(query: humanAGIRequest)
                             }) {
                                 Text("Google It")
                                     .foregroundColor(.gray)
@@ -159,7 +159,7 @@ struct AGIInstinctView: View {
                     if let query = query, !query.isEmpty {
                         // Perform some action with the new query
                         slateManager.closeSlate(with: slateUUID)
-                        slateManager.addWebSearchSlate(query: query)
+                        slateManager.addPerlexitySlate(query: query)
                         commonContext.currentQuery = ""
                     }
                 })

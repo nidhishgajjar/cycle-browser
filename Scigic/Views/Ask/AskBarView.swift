@@ -96,6 +96,9 @@ struct MultilineTextField: NSViewRepresentable {
                     let trimmedText = textView.string.trimmingCharacters(in: .whitespacesAndNewlines)
                     if trimmedText.isEmpty { return false }
 
+
+//                    let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+
 //                    if trimmedText.hasPrefix("https://") || trimmedText.hasPrefix("http://") {
 //                        if let url = URL(string: trimmedText) {
 //                            parent.slateManager.addNewSlate(url: url)
@@ -120,11 +123,13 @@ struct MultilineTextField: NSViewRepresentable {
                             textView.insertNewlineIgnoringFieldEditor(self)
                         } else {
                             if !parent.commonContext.hoverAutoSuggestState && !parent.commonContext.arrowKeyForNavSuggestions {
-                                if trimmedText.count > 75 {
-                                    parent.slateManager.addNewSlate(humanAGIRequest: trimmedText, unstated: false)
-                                } else {
-                                    parent.slateManager.addNewSlate(humanAGIRequest: trimmedText)
-                                }
+//                                if trimmedText.count > 75 {
+//                                    parent.slateManager.addNewSlate(humanAGIRequest: trimmedText, unstated: false)
+//                                } else {
+//                                    parent.slateManager.addNewSlate(humanAGIRequest: trimmedText)
+//                                }
+//                                let searchURL = URL(string: "https://perplexity.ai/search?q=\(searchString)")!
+                                parent.slateManager.addPerlexitySlate(query: trimmedText)
                             }
                         }
                         

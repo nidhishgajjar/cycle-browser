@@ -31,7 +31,8 @@ struct ActionView: View {
                 HStack(spacing: 20) {
                     ForEach(rowOneButtons, id: \.self) { label in
                         Button(action: {
-                            self.slateManager.addNewSlate(humanAGIRequest: label, unstated: false)
+//                            self.slateManager.addNewSlate(humanAGIRequest: label, unstated: false)
+                            self.slateManager.addPerlexitySlate(query: label)
                             commonContext.isAskViewActive = false
                         }) {
                             Text(label)
@@ -56,7 +57,8 @@ struct ActionView: View {
                 HStack(spacing: 20) {
                     ForEach(rowTwoButtons, id: \.self) { label in
                         Button(action: {
-                            self.slateManager.addNewSlate(humanAGIRequest: label, unstated: false)
+//                            self.slateManager.addNewSlate(humanAGIRequest: label, unstated: false)
+                            self.slateManager.addPerlexitySlate(query: label)
                             commonContext.isAskViewActive = false
                         }) {
                             Text(label)
