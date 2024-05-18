@@ -191,130 +191,130 @@ class ContextViewModel: ObservableObject {
 //  Mind Response distribution system
     var onUpdateIsThinking: ((UUID, Bool) -> Void)? 
     
-    var webSocketService: WebSocketService
+//    var webSocketService: WebSocketService
+//    
+//    private var cancellables: Set<AnyCancellable> = []
+//    
+//    init(webSocketService: WebSocketService) {
+//        self.webSocketService = webSocketService
+//        
+//        // Start listening for messages as soon as this object is created
+//        webSocketService.messagePublisher.sink { [weak self] message in
+//            self?.handleMessage(message)
+//        }.store(in: &cancellables)
+//    }
     
-    private var cancellables: Set<AnyCancellable> = []
-    
-    init(webSocketService: WebSocketService) {
-        self.webSocketService = webSocketService
-        
-        // Start listening for messages as soon as this object is created
-        webSocketService.messagePublisher.sink { [weak self] message in
-            self?.handleMessage(message)
-        }.store(in: &cancellables)
-    }
-    
-    private func handleMessage(_ message: WebSocketService.Message) {
-        guard let slateUUID = UUID(uuidString: message.slateUUID) else {
-            return
-        }
-        
-        // Retrieve the corresponding Interface object or create a new one if it doesn't exist
-        let interface = interfaces[slateUUID] ?? Interface(slateUUID: slateUUID)
-        
-        
-        // Based on the message type, show the appropriate view
-        switch message.respType {
-            
-        case "instinct":
-            onUpdateIsThinking?(UUID(uuidString: message.slateUUID)!, false)
-            if let mindResponse = message.mindResponse["chunk"] as? String {
-                appendChunk(slateUUID: message.slateUUID, chunk: mindResponse)
-            }
-            
-        case "websearch":
-            if let searchEngine = message.mindResponse["searchengine"] as? String,
-               let query = message.mindResponse["query"] as? String {
-                onUpdateIsThinking?(UUID(uuidString: message.slateUUID)!, false)
-                currentSearchEngine = searchEngine
-                currentQuery = query
-                
-            }
-            
-//        case "introspection":
-//            if let userInput = message.mindResponse["userInput"] as? String,
-//               jobs.firstIndex(where: { $0.slateUUID == slateUUID }) == nil {
-//                let newJob = Job(slateUUID: slateUUID, userInput: userInput, progress: 0, isCompleted: false)
-//                jobs.append(newJob)
-//                self.NewJobCreated = true
+//    private func handleMessage(_ message: WebSocketService.Message) {
+//        guard let slateUUID = UUID(uuidString: message.slateUUID) else {
+//            return
+//        }
+//        
+//        // Retrieve the corresponding Interface object or create a new one if it doesn't exist
+//        let interface = interfaces[slateUUID] ?? Interface(slateUUID: slateUUID)
+//        
+//        
+//        // Based on the message type, show the appropriate view
+//        switch message.respType {
+//            
+//        case "instinct":
+//            onUpdateIsThinking?(UUID(uuidString: message.slateUUID)!, false)
+//            if let mindResponse = message.mindResponse["chunk"] as? String {
+//                appendChunk(slateUUID: message.slateUUID, chunk: mindResponse)
 //            }
-            
-        case "knowledege-gap":
-            interface.showHumanApprovalView = false
-            interface.showInstinctsView = false
-            interface.showDeduceView = false
-            interface.showKnowledgeGapView = true
-            
-        case "human-approval":
-            
-            if let approvalID = message.mindResponse["approvalID"] as? String,
-               let toolID = message.mindResponse["toolID"] as? Int,
-               let toolName = message.mindResponse["toolName"] as? String,
-               let toolAction = message.mindResponse["toolAction"] as? String,
-               let inputParams = message.mindResponse["inputParams"] as? [String: Any],
-               approval.firstIndex(where: {$0.slateUUID == slateUUID}) == nil {
-                interface.showInstinctsView = false
-                interface.showKnowledgeGapView = false
-                interface.showDeduceView = false
-                interface.showHumanApprovalView = true
-        
-
-                let newApprovalRequest = Approval(slateUUID: slateUUID, approvalID: approvalID, toolID: toolID, toolName: toolName, toolAction: toolAction, inputParams: inputParams)
-                approval.append(newApprovalRequest)
-            }
-
-            
-            
-        case "deduce":
-            if let conclusion = message.mindResponse["conclusion"] as? String, conclusion == "success",
-               outcomes.firstIndex(where: {$0.slateUUID == slateUUID}) == nil {
-                interface.showInstinctsView = false
-                interface.showKnowledgeGapView = false
-                interface.showHumanApprovalView = false
-                interface.showDeduceView = true
-                
-                var type: String? = nil
-                var content: String? = nil
-                var url: String? = nil
-                if let mindResponseResult = message.mindResponse["result"] as? [String], mindResponseResult.count >= 2 {
-                    type = mindResponseResult[0]
-                    content = mindResponseResult[1]
-                    // The following lines depend on how you want to use the title and content.
-                    // Here, we assume you have methods in your `Interface` class to set the title and content.
-                }
-                if let urlString = message.mindResponse["interface"] as? String{
-                    url = urlString
-                }
-                let newOutcome = Outcome(slateUUID: slateUUID, status: "success", type: type, content: content, url: url)
-                outcomes.append(newOutcome)
-            }
-
-
-//        case "task-progress":
-//            if let progress = message.mindResponse["progress"] as? Double,
-//               let jobIndex = jobs.firstIndex(where: { $0.slateUUID == slateUUID }) {
-//                // Create a copy of the job and modify the progress
-//                let updatedJob = jobs[jobIndex]
-//                updatedJob.progress = progress
-//                if progress >= 100 {
-//                    updatedJob.isCompleted = true
-//                    interface.showDeduceView = false
-//                    interface.showInstinctsView = false
-//                    interface.showKnowledgeGapView = false
-//                    interface.showHumanApprovalView = false
+//            
+//        case "websearch":
+//            if let searchEngine = message.mindResponse["searchengine"] as? String,
+//               let query = message.mindResponse["query"] as? String {
+//                onUpdateIsThinking?(UUID(uuidString: message.slateUUID)!, false)
+//                currentSearchEngine = searchEngine
+//                currentQuery = query
+//                
+//            }
+//            
+////        case "introspection":
+////            if let userInput = message.mindResponse["userInput"] as? String,
+////               jobs.firstIndex(where: { $0.slateUUID == slateUUID }) == nil {
+////                let newJob = Job(slateUUID: slateUUID, userInput: userInput, progress: 0, isCompleted: false)
+////                jobs.append(newJob)
+////                self.NewJobCreated = true
+////            }
+//            
+//        case "knowledege-gap":
+//            interface.showHumanApprovalView = false
+//            interface.showInstinctsView = false
+//            interface.showDeduceView = false
+//            interface.showKnowledgeGapView = true
+//            
+//        case "human-approval":
+//            
+//            if let approvalID = message.mindResponse["approvalID"] as? String,
+//               let toolID = message.mindResponse["toolID"] as? Int,
+//               let toolName = message.mindResponse["toolName"] as? String,
+//               let toolAction = message.mindResponse["toolAction"] as? String,
+//               let inputParams = message.mindResponse["inputParams"] as? [String: Any],
+//               approval.firstIndex(where: {$0.slateUUID == slateUUID}) == nil {
+//                interface.showInstinctsView = false
+//                interface.showKnowledgeGapView = false
+//                interface.showDeduceView = false
+//                interface.showHumanApprovalView = true
+//        
+//
+//                let newApprovalRequest = Approval(slateUUID: slateUUID, approvalID: approvalID, toolID: toolID, toolName: toolName, toolAction: toolAction, inputParams: inputParams)
+//                approval.append(newApprovalRequest)
+//            }
+//
+//            
+//            
+//        case "deduce":
+//            if let conclusion = message.mindResponse["conclusion"] as? String, conclusion == "success",
+//               outcomes.firstIndex(where: {$0.slateUUID == slateUUID}) == nil {
+//                interface.showInstinctsView = false
+//                interface.showKnowledgeGapView = false
+//                interface.showHumanApprovalView = false
+//                interface.showDeduceView = true
+//                
+//                var type: String? = nil
+//                var content: String? = nil
+//                var url: String? = nil
+//                if let mindResponseResult = message.mindResponse["result"] as? [String], mindResponseResult.count >= 2 {
+//                    type = mindResponseResult[0]
+//                    content = mindResponseResult[1]
+//                    // The following lines depend on how you want to use the title and content.
+//                    // Here, we assume you have methods in your `Interface` class to set the title and content.
 //                }
-//                // Replace the job at the same index with the updated job
-//                var updatedJobs = jobs
-//                updatedJobs[jobIndex] = updatedJob
-//                // Replace the entire array
-//                jobs = updatedJobs
+//                if let urlString = message.mindResponse["interface"] as? String{
+//                    url = urlString
+//                }
+//                let newOutcome = Outcome(slateUUID: slateUUID, status: "success", type: type, content: content, url: url)
+//                outcomes.append(newOutcome)
 //            }
-        default:
-            break
-        }
-        
-        // Save the updated Interface object
-        interfaces[slateUUID] = interface
-    }
-
+//
+//
+////        case "task-progress":
+////            if let progress = message.mindResponse["progress"] as? Double,
+////               let jobIndex = jobs.firstIndex(where: { $0.slateUUID == slateUUID }) {
+////                // Create a copy of the job and modify the progress
+////                let updatedJob = jobs[jobIndex]
+////                updatedJob.progress = progress
+////                if progress >= 100 {
+////                    updatedJob.isCompleted = true
+////                    interface.showDeduceView = false
+////                    interface.showInstinctsView = false
+////                    interface.showKnowledgeGapView = false
+////                    interface.showHumanApprovalView = false
+////                }
+////                // Replace the job at the same index with the updated job
+////                var updatedJobs = jobs
+////                updatedJobs[jobIndex] = updatedJob
+////                // Replace the entire array
+////                jobs = updatedJobs
+////            }
+//        default:
+//            break
+//        }
+//        
+//        // Save the updated Interface object
+//        interfaces[slateUUID] = interface
+//    }
+//
 }

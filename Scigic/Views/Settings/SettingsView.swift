@@ -7,7 +7,7 @@ import HotKey
 
 struct SettingsView: View {
     @ObservedObject var hotKeyViewModel: ShortcutViewModel
-    @EnvironmentObject var authManager: AuthManager
+//    @EnvironmentObject var authManager: AuthManager
 
     @State private var selectedKey: Key = .space
     @State private var isOptionModifierOn = true
@@ -68,36 +68,36 @@ struct SettingsView: View {
                 .padding()
 
             TabView {
-                VStack {
-
-                    if !authManager.isUserLoggedIn || !authManager.isEmailVerified {
-
-                        NavigationLink("Log In", destination: LoginView())
-
-                    } else {
-                        Button("Log Out") {
-                            authManager.logoutUser()
-                        }
-
-                        Button("Send Password Rest Link") {
-                               authManager.resetPassword { success in
-                                   if success {
-                                       showAlert = true
-                                   }
-                               }
-                           }
-                        .alert(isPresented: $showAlert) {
-                                Alert(
-                                    title: Text("Password Reset Email Sent"),
-                                    message: Text("Please check your Inbox. Check your Junk folder before requesting another link"),
-                                    dismissButton: .default(Text("OK"))
-                                )
-                            }
-                    }
-                }
-                .tabItem {
-                    Text("Account")
-                }
+//                VStack {
+//
+//                    if !authManager.isUserLoggedIn || !authManager.isEmailVerified {
+//
+//                        NavigationLink("Log In", destination: LoginView())
+//
+//                    } else {
+//                        Button("Log Out") {
+//                            authManager.logoutUser()
+//                        }
+//
+//                        Button("Send Password Rest Link") {
+//                               authManager.resetPassword { success in
+//                                   if success {
+//                                       showAlert = true
+//                                   }
+//                               }
+//                           }
+//                        .alert(isPresented: $showAlert) {
+//                                Alert(
+//                                    title: Text("Password Reset Email Sent"),
+//                                    message: Text("Please check your Inbox. Check your Junk folder before requesting another link"),
+//                                    dismissButton: .default(Text("OK"))
+//                                )
+//                            }
+//                    }
+//                }
+//                .tabItem {
+//                    Text("Account")
+//                }
 
                 VStack {
                     Text("Change Shortcut").font(.headline).padding()

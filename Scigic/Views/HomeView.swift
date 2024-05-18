@@ -11,7 +11,7 @@ import SwiftUI
 struct HomeView: View {
 //    @EnvironmentObject var authManager: AuthManager
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var webSocketService: WebSocketService
+//    @EnvironmentObject var webSocketService: WebSocketService
 
     var body: some View {
         ZStack {

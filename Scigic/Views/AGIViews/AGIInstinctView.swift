@@ -6,7 +6,7 @@ import SwiftUI
 import Markdown
 
 struct AGIInstinctView: View {
-    @EnvironmentObject var webSocketService: WebSocketService
+//    @EnvironmentObject var webSocketService: WebSocketService
     @EnvironmentObject var commonContext: ContextViewModel
     @EnvironmentObject var slateManager: SlateManagerViewModel
 

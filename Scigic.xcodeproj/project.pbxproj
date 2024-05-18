@@ -14,7 +14,6 @@
 		C27A591E2A676FBC0058CA02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27A591D2A676FBC0058CA02 /* Preview Assets.xcassets */; };
 		C27A59262A676FDD0058CA02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C27A59252A676FDC0058CA02 /* GoogleService-Info.plist */; };
 		C27A59292A676FE90058CA02 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = C27A59282A676FE90058CA02 /* HotKey */; };
-		C27A592C2A6770280058CA02 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = C27A592B2A6770280058CA02 /* FirebaseAuth */; };
 		C27A592E2A67705B0058CA02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A592D2A67705B0058CA02 /* AppDelegate.swift */; };
 		C27A59372A67714F0058CA02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59362A67714F0058CA02 /* HomeView.swift */; };
 		C27A59422A6771CE0058CA02 /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A593E2A6771CE0058CA02 /* AskView.swift */; };
@@ -134,7 +133,6 @@
 				C2A4B1F72A79DEFD001334D5 /* Markdown in Frameworks */,
 				C27A59292A676FE90058CA02 /* HotKey in Frameworks */,
 				C2A4B1FA2A79DF26001334D5 /* Highlighter in Frameworks */,
-				C27A592C2A6770280058CA02 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,7 +346,6 @@
 			name = Scigic;
 			packageProductDependencies = (
 				C27A59282A676FE90058CA02 /* HotKey */,
-				C27A592B2A6770280058CA02 /* FirebaseAuth */,
 				C2A4B1F62A79DEFD001334D5 /* Markdown */,
 				C2A4B1F92A79DF26001334D5 /* Highlighter */,
 				C2CD96F62A81BCB900EA1141 /* Sparkle */,
@@ -383,7 +380,6 @@
 			mainGroup = C27A590A2A676FBA0058CA02;
 			packageReferences = (
 				C27A59272A676FE90058CA02 /* XCRemoteSwiftPackageReference "HotKey" */,
-				C27A592A2A6770280058CA02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				C2A4B1F52A79DEFD001334D5 /* XCRemoteSwiftPackageReference "swift-markdown" */,
 				C2A4B1F82A79DF26001334D5 /* XCRemoteSwiftPackageReference "HighlighterSwift" */,
 				C2CD96F52A81BCB900EA1141 /* XCRemoteSwiftPackageReference "Sparkle" */,
@@ -598,7 +594,7 @@
 				CODE_SIGN_ENTITLEMENTS = scigic/scigic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N93T88Q42V;
@@ -617,7 +613,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ai.constitute.scigic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -633,7 +629,7 @@
 				CODE_SIGN_ENTITLEMENTS = scigic/scigic.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 12;
+				CURRENT_PROJECT_VERSION = 13;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N93T88Q42V;
@@ -652,7 +648,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0.1;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = ai.constitute.scigic;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -692,14 +688,6 @@
 				kind = branch;
 			};
 		};
-		C27A592A2A6770280058CA02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.0.0;
-			};
-		};
 		C2A4B1F52A79DEFD001334D5 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apple/swift-markdown";
@@ -731,11 +719,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = C27A59272A676FE90058CA02 /* XCRemoteSwiftPackageReference "HotKey" */;
 			productName = HotKey;
-		};
-		C27A592B2A6770280058CA02 /* FirebaseAuth */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C27A592A2A6770280058CA02 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseAuth;
 		};
 		C2A4B1F62A79DEFD001334D5 /* Markdown */ = {
 			isa = XCSwiftPackageProductDependency;

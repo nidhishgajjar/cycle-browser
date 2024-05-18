@@ -5,7 +5,6 @@
 //  Created by Nidhish Gajjar on 2023-07-18.
 //
 import SwiftUI
-import Firebase
 import Sparkle
 
 @main
@@ -16,10 +15,9 @@ struct ScigicApp: App {
     // Add updater manager
     @ObservedObject private var updaterManager = UpdaterManager()
     
-    @EnvironmentObject var webSocketService: WebSocketService
+//    @EnvironmentObject var webSocketService: WebSocketService
     
     init() {
-        FirebaseApp.configure()
         
         // Create a strong reference to updaterManager
         let updater = self.updaterManager

@@ -8,17 +8,16 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var authManager: AuthManager
-    @EnvironmentObject var webSocketService: WebSocketService
+//    @EnvironmentObject var webSocketService: WebSocketService
 
     var body: some View {
         Group {
-            if authManager.isUserLoggedIn && webSocketService.hasActiveSubscription {
+//            if authManager.isUserLoggedIn && webSocketService.hasActiveSubscription {
                 HomeView()
-            }
-            else {
-                LoginView()
-            }
+//            }
+//            else {
+//                LoginView()
+//            }
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .cornerRadius(20)

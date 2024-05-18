@@ -11,27 +11,27 @@ import AppKit
 import Combine
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-    var authManager: AuthManager!
+//    var authManager: AuthManager!
     var mainWindow: NSWindow!
     var settingsWindow: NSWindow!
     var lastKnownPosition = [String: NSPoint]()
     var hotKeyViewModel: ShortcutViewModel!
     var commonContext: ContextViewModel!
     var slateManager: SlateManagerViewModel
-    var webSocketService: WebSocketService!
+//    var webSocketService: WebSocketService!
 //    var passwordManagerService: PasswordManagerService
     var autoSuggestViewModel: AutoSuggestViewModel
     private var loginStatusCancellable: AnyCancellable?
 
 
     override init() {
-        authManager = AuthManager()
-        webSocketService = WebSocketService(authManager: authManager)
-        commonContext = ContextViewModel(webSocketService: webSocketService)
+//        authManager = AuthManager()
+//        webSocketService = WebSocketService(authManager: authManager)
+        commonContext = ContextViewModel()
 //        passwordManagerService = PasswordManagerService()
         autoSuggestViewModel = AutoSuggestViewModel()
         
-        self.slateManager = SlateManagerViewModel(context: commonContext, webSocket: webSocketService)
+        self.slateManager = SlateManagerViewModel(context: commonContext)
         
         
         
@@ -39,23 +39,23 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.init()
         hotKeyViewModel = ShortcutViewModel(toggleWindow: toggleMainWindow)
         
-        loginStatusCancellable = authManager.$isUserLoggedIn
-            .filter { $0 == true } // Only proceed when the user logs in
-            .sink { [weak self] _ in
-//                self?.webSocketService.checkSubscriptionStatus() // Replace with the actual method name
-//                self?.webSocketService.startSubscriptionCheckTimer()
-//                self?.webSocketService.startHealthCheckTimer()
-//                self?.webSocketService.connect()
-                
-                DispatchQueue.global(qos: .background).async {
-                    self?.webSocketService.checkSubscriptionStatus()
-                    self?.webSocketService.startSubscriptionCheckTimer()
-                    self?.webSocketService.startHealthCheckTimer()
-                    self?.webSocketService.connect()
-                }
-
-
-            }
+//        loginStatusCancellable = authManager.$isUserLoggedIn
+//            .filter { $0 == true } // Only proceed when the user logs in
+//            .sink { [weak self] _ in
+////                self?.webSocketService.checkSubscriptionStatus() // Replace with the actual method name
+////                self?.webSocketService.startSubscriptionCheckTimer()
+////                self?.webSocketService.startHealthCheckTimer()
+////                self?.webSocketService.connect()
+//                
+//                DispatchQueue.global(qos: .background).async {
+//                    self?.webSocketService.checkSubscriptionStatus()
+//                    self?.webSocketService.startSubscriptionCheckTimer()
+//                    self?.webSocketService.startHealthCheckTimer()
+//                    self?.webSocketService.connect()
+//                }
+//
+//
+//            }
 
     }
     
@@ -76,7 +76,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainWindow.collectionBehavior.insert(.moveToActiveSpace)
         mainWindow.center()
         mainWindow.setFrameAutosaveName("Scigic")
-        mainWindow.contentView = NSHostingView(rootView: ContentView().environmentObject(authManager).environmentObject(commonContext).environmentObject(slateManager).environmentObject(webSocketService).environmentObject(autoSuggestViewModel))
+        mainWindow.contentView = NSHostingView(rootView: ContentView().environmentObject(commonContext).environmentObject(slateManager).environmentObject(autoSuggestViewModel))
         mainWindow.backgroundColor = NSColor.clear
 
         mainWindow.orderOut(nil)
@@ -87,7 +87,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered, defer: false)
         settingsWindow.center()
         settingsWindow.setFrameAutosaveName("Settings")
-        settingsWindow.contentView = NSHostingView(rootView: SettingsView(hotKeyViewModel: hotKeyViewModel).environmentObject(authManager))
+        settingsWindow.contentView = NSHostingView(rootView: SettingsView(hotKeyViewModel: hotKeyViewModel))
         settingsWindow.isReleasedWhenClosed = false   // Add this line
         settingsWindow.orderOut(nil)  // Initially, make the window not visible
         
