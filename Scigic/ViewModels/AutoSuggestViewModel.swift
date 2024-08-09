@@ -30,12 +30,6 @@ class AutoSuggestViewModel: ObservableObject, GoogleAutocompleteServiceDelegate 
         googleService.fetchGoogleAutoCompleteSuggestions(query)
     }
     
-//    private func isValidURL(_ string: String) -> Bool {
-//        // The URL initializer checks if the string can be converted to a URL.
-//        // If it can, the initializer will return a non-nil URL object.
-//        // Therefore, we can use this to determine if the string is a valid URL.
-//        return URL(string: string) != nil
-//    }
 
     private func prepareFinalSuggestions(_ suggestions: [String]) -> [String] {
 

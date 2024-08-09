@@ -16,10 +16,6 @@ struct WebView: NSViewRepresentable {
 
     func updateNSView(_ nsView: WKWebView, context: Context) {
         
-        // check if humanAGIRequest is nil then it doesn't have a url so nothing needs to be updated
-//        if nsView.url != url && slateManager.slates[slateManager.currentSlateIndex].humanAGIRequest == nil {
-//            nsView.load(URLRequest(url: url))
-//        }
     }
 
     typealias NSViewType = WKWebView

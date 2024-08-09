@@ -13,7 +13,7 @@ struct ChooseTypeOfSlateView: View {
     var body: some View {
         if slate.isThinking {
             // Need to keep slateUUID here as we will need it in the error view to close slate
-            ThinkingView(errorCopyText: slate.humanAGIRequest ?? slate.currentUrl?.absoluteString ?? "Please try to disable and re-enable the app", slateUUID: slate.slateUUID)
+            ThinkingView(errorCopyText: slate.currentUrl?.absoluteString ?? "Please try to disable and re-enable the app", slateUUID: slate.slateUUID)
         } else if let webViewUrl = slate.url {
             WebView(url: webViewUrl)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -22,16 +22,6 @@ struct ChooseTypeOfSlateView: View {
                 .onAppear {
                     DispatchQueue.main.async {
                         webviewFocused = true
-                    }
-                }
-        }
-        else if let humanAGIRequest = slate.humanAGIRequest, let interface = commonContext.interfaces[slate.slateUUID] {
-            AGIView(interface: interface, humanAGIRequest: humanAGIRequest)
-                .onAppear {
-//                    print("AGI Slate appeared")
-//                    print(slateManager.currentSlateIndex)
-                    DispatchQueue.main.async {
-                        commonContext.askBarFocusedOnAGI = true
                     }
                 }
         }

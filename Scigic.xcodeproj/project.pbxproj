@@ -24,20 +24,11 @@
 		C27A594B2A6771E80058CA02 /* NavButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59472A6771E80058CA02 /* NavButtons.swift */; };
 		C27A594C2A6771E80058CA02 /* BackForwardButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59482A6771E80058CA02 /* BackForwardButtons.swift */; };
 		C27A594D2A6771E80058CA02 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59492A6771E80058CA02 /* PaletteView.swift */; };
-		C27A59522A6771F70058CA02 /* AGIHumanApprovalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A594E2A6771F70058CA02 /* AGIHumanApprovalView.swift */; };
-		C27A59532A6771F70058CA02 /* AGIKnowledgeGapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A594F2A6771F70058CA02 /* AGIKnowledgeGapView.swift */; };
-		C27A59542A6771F70058CA02 /* AGIDeduceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59502A6771F70058CA02 /* AGIDeduceView.swift */; };
-		C27A59552A6771F70058CA02 /* AGIInstinctView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59512A6771F70058CA02 /* AGIInstinctView.swift */; };
-		C27A595A2A6772040058CA02 /* HistoryPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59562A6772040058CA02 /* HistoryPopView.swift */; };
-		C27A595B2A6772040058CA02 /* NotificationPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59572A6772040058CA02 /* NotificationPopView.swift */; };
-		C27A595C2A6772040058CA02 /* JobsPopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59582A6772040058CA02 /* JobsPopView.swift */; };
-		C27A595D2A6772040058CA02 /* PopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59592A6772040058CA02 /* PopView.swift */; };
 		C27A595F2A67720E0058CA02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A595E2A67720E0058CA02 /* SettingsView.swift */; };
 		C27A59652A67721F0058CA02 /* SlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59602A67721E0058CA02 /* SlateView.swift */; };
 		C27A59662A67721F0058CA02 /* ChooseTypeOfSlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59612A67721E0058CA02 /* ChooseTypeOfSlateView.swift */; };
 		C27A59672A67721F0058CA02 /* ThinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59622A67721E0058CA02 /* ThinkingView.swift */; };
 		C27A59682A67721F0058CA02 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59632A67721E0058CA02 /* WebView.swift */; };
-		C27A59692A67721F0058CA02 /* AGIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59642A67721E0058CA02 /* AGIView.swift */; };
 		C27A596B2A6772370058CA02 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A596A2A6772370058CA02 /* AuthManager.swift */; };
 		C27A596D2A6772A40058CA02 /* WebSocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A596C2A6772A40058CA02 /* WebSocketService.swift */; };
 		C27A59732A6772B50058CA02 /* CanvasStyling.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A596E2A6772B40058CA02 /* CanvasStyling.swift */; };
@@ -85,20 +76,11 @@
 		C27A59472A6771E80058CA02 /* NavButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavButtons.swift; sourceTree = "<group>"; };
 		C27A59482A6771E80058CA02 /* BackForwardButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackForwardButtons.swift; sourceTree = "<group>"; };
 		C27A59492A6771E80058CA02 /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
-		C27A594E2A6771F70058CA02 /* AGIHumanApprovalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGIHumanApprovalView.swift; sourceTree = "<group>"; };
-		C27A594F2A6771F70058CA02 /* AGIKnowledgeGapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGIKnowledgeGapView.swift; sourceTree = "<group>"; };
-		C27A59502A6771F70058CA02 /* AGIDeduceView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGIDeduceView.swift; sourceTree = "<group>"; };
-		C27A59512A6771F70058CA02 /* AGIInstinctView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGIInstinctView.swift; sourceTree = "<group>"; };
-		C27A59562A6772040058CA02 /* HistoryPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryPopView.swift; sourceTree = "<group>"; };
-		C27A59572A6772040058CA02 /* NotificationPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationPopView.swift; sourceTree = "<group>"; };
-		C27A59582A6772040058CA02 /* JobsPopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JobsPopView.swift; sourceTree = "<group>"; };
-		C27A59592A6772040058CA02 /* PopView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopView.swift; sourceTree = "<group>"; };
 		C27A595E2A67720E0058CA02 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		C27A59602A67721E0058CA02 /* SlateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlateView.swift; sourceTree = "<group>"; };
 		C27A59612A67721E0058CA02 /* ChooseTypeOfSlateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTypeOfSlateView.swift; sourceTree = "<group>"; };
 		C27A59622A67721E0058CA02 /* ThinkingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThinkingView.swift; sourceTree = "<group>"; };
 		C27A59632A67721E0058CA02 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		C27A59642A67721E0058CA02 /* AGIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AGIView.swift; sourceTree = "<group>"; };
 		C27A596A2A6772370058CA02 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		C27A596C2A6772A40058CA02 /* WebSocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketService.swift; sourceTree = "<group>"; };
 		C27A596E2A6772B40058CA02 /* CanvasStyling.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CanvasStyling.swift; sourceTree = "<group>"; };
@@ -185,10 +167,8 @@
 		C27A592F2A6770CD0058CA02 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				C27A59382A6771530058CA02 /* AGIViews */,
 				C27A593D2A67718A0058CA02 /* Slate */,
 				C27A59392A67715E0058CA02 /* Ask */,
-				C27A593B2A6771770058CA02 /* Pop */,
 				C27A593A2A67716B0058CA02 /* Palette */,
 				C27A593C2A6771810058CA02 /* Settings */,
 				C27A59312A6770EC0058CA02 /* Onboarding */,
@@ -260,17 +240,6 @@
 			path = ViewModels;
 			sourceTree = "<group>";
 		};
-		C27A59382A6771530058CA02 /* AGIViews */ = {
-			isa = PBXGroup;
-			children = (
-				C27A59502A6771F70058CA02 /* AGIDeduceView.swift */,
-				C27A594E2A6771F70058CA02 /* AGIHumanApprovalView.swift */,
-				C27A59512A6771F70058CA02 /* AGIInstinctView.swift */,
-				C27A594F2A6771F70058CA02 /* AGIKnowledgeGapView.swift */,
-			);
-			path = AGIViews;
-			sourceTree = "<group>";
-		};
 		C27A59392A67715E0058CA02 /* Ask */ = {
 			isa = PBXGroup;
 			children = (
@@ -296,17 +265,6 @@
 			path = Palette;
 			sourceTree = "<group>";
 		};
-		C27A593B2A6771770058CA02 /* Pop */ = {
-			isa = PBXGroup;
-			children = (
-				C27A59562A6772040058CA02 /* HistoryPopView.swift */,
-				C27A59582A6772040058CA02 /* JobsPopView.swift */,
-				C27A59572A6772040058CA02 /* NotificationPopView.swift */,
-				C27A59592A6772040058CA02 /* PopView.swift */,
-			);
-			path = Pop;
-			sourceTree = "<group>";
-		};
 		C27A593C2A6771810058CA02 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -318,7 +276,6 @@
 		C27A593D2A67718A0058CA02 /* Slate */ = {
 			isa = PBXGroup;
 			children = (
-				C27A59642A67721E0058CA02 /* AGIView.swift */,
 				C27A59612A67721E0058CA02 /* ChooseTypeOfSlateView.swift */,
 				C27A59602A67721E0058CA02 /* SlateView.swift */,
 				C27A59622A67721E0058CA02 /* ThinkingView.swift */,
@@ -418,11 +375,8 @@
 				C27A59742A6772B50058CA02 /* CodeBlockFormat.swift in Sources */,
 				C27A59442A6771CE0058CA02 /* AskBarView.swift in Sources */,
 				C27A59672A67721F0058CA02 /* ThinkingView.swift in Sources */,
-				C27A595B2A6772040058CA02 /* NotificationPopView.swift in Sources */,
-				C27A595C2A6772040058CA02 /* JobsPopView.swift in Sources */,
 				C27A59192A676FBA0058CA02 /* ContentView.swift in Sources */,
 				C27A59452A6771CE0058CA02 /* ActionView.swift in Sources */,
-				C27A59522A6771F70058CA02 /* AGIHumanApprovalView.swift in Sources */,
 				C2A389D52A89B62F00B4B47F /* AutoSuggestViewModel.swift in Sources */,
 				C2874B762A907B8E00A9F4B1 /* AskScigicButton.swift in Sources */,
 				C27A596B2A6772370058CA02 /* AuthManager.swift in Sources */,
@@ -434,11 +388,9 @@
 				C27A597B2A6772C80058CA02 /* ShortcutViewModel.swift in Sources */,
 				C27A59822A6773660058CA02 /* LoginView.swift in Sources */,
 				C27A594A2A6771E80058CA02 /* URLButton.swift in Sources */,
-				C27A595D2A6772040058CA02 /* PopView.swift in Sources */,
 				C2A4B1FC2A79E038001334D5 /* MarkdownAttributedStringParser.swift in Sources */,
 				C27A59652A67721F0058CA02 /* SlateView.swift in Sources */,
 				C27A597D2A6772C80058CA02 /* SlateManagerViewModel.swift in Sources */,
-				C27A595A2A6772040058CA02 /* HistoryPopView.swift in Sources */,
 				C27A597C2A6772C80058CA02 /* ContextViewModel.swift in Sources */,
 				C27A59762A6772B50058CA02 /* RoundedCornersShape.swift in Sources */,
 				C27A596D2A6772A40058CA02 /* WebSocketService.swift in Sources */,
@@ -446,7 +398,6 @@
 				C2874B782A95A4C000A9F4B1 /* ErrorView.swift in Sources */,
 				C2A4B1FE2A79E309001334D5 /* ParserResult.swift in Sources */,
 				C27A59662A67721F0058CA02 /* ChooseTypeOfSlateView.swift in Sources */,
-				C27A59552A6771F70058CA02 /* AGIInstinctView.swift in Sources */,
 				C27A59772A6772B50058CA02 /* VisualEffects.swift in Sources */,
 				C2291C882A9840F7003ED738 /* AutoUpdateService.swift in Sources */,
 				C27A59172A676FBA0058CA02 /* ScigicApp.swift in Sources */,
@@ -454,12 +405,9 @@
 				C27A59832A6773660058CA02 /* VerifyEmailView.swift in Sources */,
 				C27A594B2A6771E80058CA02 /* NavButtons.swift in Sources */,
 				C27A59732A6772B50058CA02 /* CanvasStyling.swift in Sources */,
-				C27A59532A6771F70058CA02 /* AGIKnowledgeGapView.swift in Sources */,
 				C27A59432A6771CE0058CA02 /* ClipsView.swift in Sources */,
 				C27A594D2A6771E80058CA02 /* PaletteView.swift in Sources */,
 				C2A389D72A8AEBF900B4B47F /* AutoSuggestView.swift in Sources */,
-				C27A59542A6771F70058CA02 /* AGIDeduceView.swift in Sources */,
-				C27A59692A67721F0058CA02 /* AGIView.swift in Sources */,
 				C27A59422A6771CE0058CA02 /* AskView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
