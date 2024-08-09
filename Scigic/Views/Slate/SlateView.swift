@@ -182,34 +182,10 @@ struct SlateView: View {
                     }
                 }
             }
-            PaletteView(url: slateManager.slates[currentSlate.wrappedValue].url?.absoluteString ?? "",
-                        humanAGIRequest: slateManager.slates[currentSlate.wrappedValue].humanAGIRequest ?? "")
+            PaletteView(url: slateManager.slates[currentSlate.wrappedValue].url?.absoluteString ?? "")
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 39))
-//            if currentSlate.wrappedValue < slateManager.slates.count {
-//                let slate = slateManager.slates[currentSlate.wrappedValue]
-//                PaletteView(url: slate.url?.absoluteString ?? "",
-//                            humanAGIRequest: slate.humanAGIRequest ?? "")
-//                    .onAppear {
-//                        print("Palette view has appeared!")
-//                        print(currentSlate.wrappedValue)
-//                    }
-//                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 39))
-//            }
+
         }
-//        .onAppear {
-//            // Initiate Gmail authorization if necessary
-//            if UserDefaults.standard.bool(forKey: "hasShownGmailAuth") == false {
-//                let scope = "https://www.googleapis.com/auth/gmail.readonly%20https://www.googleapis.com/auth/gmail.send%20https://www.googleapis.com/auth/gmail.modify"
-//                let clientId = "776576853440-noito2t5c4qfeigobtotuci924cgqf49.apps.googleusercontent.com"
-//                let redirectUri = "https://constitute.ai"
-//                let urlString = "https://accounts.google.com/o/oauth2/v2/auth?client_id=\(clientId)&redirect_uri=\(redirectUri)&response_type=code&scope=\(scope)&access_type=offline"
-//
-//                if let url = URL(string: urlString) {
-//                    slateManager.addNewSlate(url: url)
-//                }
-//                // Set the flag
-//                UserDefaults.standard.set(true, forKey: "hasShownGmailAuth")
-//            }
-//        }
+
     }
 }

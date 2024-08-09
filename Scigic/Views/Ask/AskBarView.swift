@@ -123,12 +123,6 @@ struct MultilineTextField: NSViewRepresentable {
                             textView.insertNewlineIgnoringFieldEditor(self)
                         } else {
                             if !parent.commonContext.hoverAutoSuggestState && !parent.commonContext.arrowKeyForNavSuggestions {
-//                                if trimmedText.count > 75 {
-//                                    parent.slateManager.addNewSlate(humanAGIRequest: trimmedText, unstated: false)
-//                                } else {
-//                                    parent.slateManager.addNewSlate(humanAGIRequest: trimmedText)
-//                                }
-//                                let searchURL = URL(string: "https://perplexity.ai/search?q=\(searchString)")!
                                 parent.slateManager.addPerlexitySlate(query: trimmedText)
                             }
                         }

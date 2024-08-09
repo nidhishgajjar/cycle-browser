@@ -10,7 +10,6 @@ struct PaletteView: View {
     @State var textFieldHeight: CGFloat = 30
     @State private var isPassButtonLoading: Bool = false
     let url: String
-    let humanAGIRequest: String
     
     @Environment(\.colorScheme) var colorScheme
 
