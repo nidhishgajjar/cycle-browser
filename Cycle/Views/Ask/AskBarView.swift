@@ -35,7 +35,7 @@ class CustomTextView: NSTextView {
 struct MultilineTextField: NSViewRepresentable {
     @Binding var text: String
     @Binding var height: CGFloat // Add a @State variable for the height
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
 
     let padding: CGFloat
@@ -71,7 +71,7 @@ struct MultilineTextField: NSViewRepresentable {
 
             let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             let searchURL = URL(string: "https://google.com/search?q=\(searchString)")!
-            parent.slateManager.addNewSlate(url: searchURL)
+            parent.tabManager.addNewTab(url: searchURL)
 //            parent.commonContext.isAskViewActive.toggle()
             parent.commonContext.askBarFocusedOnAGI.toggle()
             parent.commonContext.askText = "" 
@@ -103,10 +103,10 @@ struct MultilineTextField: NSViewRepresentable {
                             // If it's just a website name + TLD, prepend "https://"
                             let urlString = "https://" + trimmedText
                             if let url = URL(string: urlString) {
-                                parent.slateManager.addNewSlate(url: url)
+                                parent.tabManager.addNewTab(url: url)
                             }
                         } else if let url = URL(string: trimmedText) {
-                            parent.slateManager.addNewSlate(url: url)
+                            parent.tabManager.addNewTab(url: url)
                         }
                         
                         
@@ -115,7 +115,7 @@ struct MultilineTextField: NSViewRepresentable {
                             textView.insertNewlineIgnoringFieldEditor(self)
                         } else {
                             if !parent.commonContext.hoverAutoSuggestState && !parent.commonContext.arrowKeyForNavSuggestions {
-                                parent.slateManager.addPerlexitySlate(query: trimmedText)
+                                parent.tabManager.addPerlexityTab(query: trimmedText)
                             }
                         }
                         
@@ -254,7 +254,7 @@ struct AskBarView: View {
     @Binding var text: String
     @Binding var height: CGFloat // Add height binding here
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     @FocusState var isTextFieldFocused: Bool
     
     @Environment(\.colorScheme) var colorScheme

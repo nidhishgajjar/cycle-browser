@@ -7,7 +7,7 @@ import Combine
 
 struct ClipsView: View {
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     
     @Environment(\.colorScheme) var colorScheme
     
@@ -43,7 +43,7 @@ struct ClipsView: View {
                             if index < commonContext.clips.count {
                                 let clip = commonContext.clips[index]
                                 commonContext.askTextFromPalette = ""
-                                slateManager.addNewSlate(url: clip.url)
+                                tabManager.addNewTab(url: clip.url)
                             }
                         }) {
                             Rectangle()

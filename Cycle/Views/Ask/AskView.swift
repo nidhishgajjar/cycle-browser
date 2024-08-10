@@ -7,7 +7,7 @@ import Foundation
 
 struct AskView: View {
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
 
     @State var textFieldHeight: CGFloat = 30
     @State private var suggestionRowHeight: CGFloat = 55
@@ -60,7 +60,7 @@ struct AskView: View {
                                 }
                                 
                                 AskBarView(text: $commonContext.askText, height: $textFieldHeight)
-                                    .environmentObject(slateManager)
+                                    .environmentObject(tabManager)
                                     .frame(maxHeight: textFieldHeight > 100 ? min(textFieldHeight, geometry.size.height) : textFieldHeight)
                                     .padding(EdgeInsets(top: 0, leading: 50, bottom: 57, trailing: 50))
                                     .shadow(color: Color.gray, radius: (autoComplete.suggestions.count > 1 && commonContext.askText.count > 0) ? 0.5 : 0)

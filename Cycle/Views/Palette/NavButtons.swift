@@ -9,7 +9,7 @@ struct NavButtons: View {
     let url: String
     @State private var isPassNavButtonLoading: Bool = false
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
 
     var body: some View {
         HStack {
@@ -52,7 +52,7 @@ struct NavButtons: View {
 //                    .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 0))
                 
                 Button(action: {
-                    slateManager.reloadCurrentSlate()
+                    tabManager.reloadCurrentTab()
                 }) {
                     // Replace text with an image
                     Image(systemName: "arrow.clockwise")

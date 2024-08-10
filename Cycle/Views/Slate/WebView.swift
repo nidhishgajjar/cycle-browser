@@ -7,11 +7,11 @@ import WebKit
 
 
 struct WebView: NSViewRepresentable {
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     let url: URL
 
     func makeNSView(context: Context) -> WKWebView {
-        slateManager.view(for: url)
+        tabManager.view(for: url)
     }
 
     func updateNSView(_ nsView: WKWebView, context: Context) {

@@ -7,7 +7,7 @@ import SwiftUI
 
 struct ActionView: View {
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     // Separate data for each row
     let rowOneButtons = [
         "Tell me a bedtime story",
@@ -31,7 +31,7 @@ struct ActionView: View {
                 HStack(spacing: 20) {
                     ForEach(rowOneButtons, id: \.self) { label in
                         Button(action: {
-                            self.slateManager.addPerlexitySlate(query: label)
+                            self.tabManager.addPerlexityTab(query: label)
                             commonContext.isAskViewActive = false
                         }) {
                             Text(label)
@@ -56,7 +56,7 @@ struct ActionView: View {
                 HStack(spacing: 20) {
                     ForEach(rowTwoButtons, id: \.self) { label in
                         Button(action: {
-                            self.slateManager.addPerlexitySlate(query: label)
+                            self.tabManager.addPerlexityTab(query: label)
                             commonContext.isAskViewActive = false
                         }) {
                             Text(label)

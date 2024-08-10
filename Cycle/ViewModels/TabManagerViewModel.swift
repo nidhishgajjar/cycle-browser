@@ -10,9 +10,9 @@ import Foundation
 
 class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKUIDelegate {
 
-    struct Slate: Identifiable {
+    struct Tab: Identifiable {
         let id: UUID
-        let slateUUID: UUID
+        let tabUUID: UUID
         let webView: WKWebView?
         var url: URL? {
             webView?.url
@@ -24,12 +24,12 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
         var isThinking: Bool
     }
 
-    @Published var slates: [Slate] = []
-    @Published var currentSlateIndex: Int = 0
+    @Published var tabs: [Tab] = []
+    @Published var currentTabIndex: Int = 0
     @Published var version: Int = 0
     
     var commonContext: ContextViewModel
-    var timeOnCurrentSlate: Date?
+    var timeOnCurrentTab: Date?
     var timer: Timer?
     var secondaryWebViews = [WKWebView: Bool]() // The Bool value indicates whether the WebView has been redirected to an OAuth provider
     let oauthProviders = ["accounts.google.com", "login.microsoftonline.com", /* any other providers */]
@@ -41,7 +41,7 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 //        self.passwordManagerService = passwordManager
         super.init()
         let scigicClip = URL(string: "https://constitute.ai")!
-        addNewSlate(url: scigicClip)
+        addNewTab(url: scigicClip)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(appMovedToBackground), name: NSApplication.willResignActiveNotification, object: nil)
         
@@ -62,8 +62,8 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
     }
 
     func view(for url: URL) -> WKWebView {
-        if let index = slates.firstIndex(where: { $0.url == url }), !isSlateOld(slates[index]) {
-            return slates[index].webView ?? WKWebView() // Provide a default value
+        if let index = tabs.firstIndex(where: { $0.url == url }), !isTabOld(tabs[index]) {
+            return tabs[index].webView ?? WKWebView() // Provide a default value
         }
         let webView = createWebView(for: url)
         webView.navigationDelegate = self
@@ -107,14 +107,14 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 
 
     
-    func addNewSlate(url: URL? = nil) {
+    func addNewTab(url: URL? = nil) {
         var webView: WKWebView? = nil
         var initialUrl: URL? = nil
 
         
-        if commonContext.shouldMoveCurrentSlateToLast == true {
-            moveCurrentSlateToLast(from: currentSlateIndex)
-            commonContext.shouldMoveCurrentSlateToLast = false
+        if commonContext.shouldMoveCurrentTabToLast == true {
+            moveCurrentTabToLast(from: currentTabIndex)
+            commonContext.shouldMoveCurrentTabToLast = false
 
         }
         commonContext.isAskViewActive = false
@@ -125,32 +125,32 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
             
         // Check if URL is in clips
             if let clipIndex = commonContext.clips.firstIndex(where: { $0.url == url }) {
-                  // If clip slateUUID is present
-                if let existingSlateUUID = commonContext.clips[clipIndex].slateUUID {
-                    // Jump to slate
-                    jumpToSlate(with: existingSlateUUID)
+                  // If clip tabUUID is present
+                if let existingTabUUID = commonContext.clips[clipIndex].tabUUID {
+                    // Jump to tab
+                    jumpToTab(with: existingTabUUID)
                     return
                 }
             }
         }
 
-        let slateUUID = UUID()
-        let slate = Slate(id: UUID(), slateUUID: slateUUID, webView: webView, currentUrl: initialUrl, initialUrl: initialUrl, timestamp: Date(), lastUsedTimestamp: Date(), isThinking: true)
-        slates.append(slate)
+        let tabUUID = UUID()
+        let tab = Tab(id: UUID(), tabUUID: tabUUID, webView: webView, currentUrl: initialUrl, initialUrl: initialUrl, timestamp: Date(), lastUsedTimestamp: Date(), isThinking: true)
+        tabs.append(tab)
         
-        // If URL is in clips, update its slateUUID
+        // If URL is in clips, update its tabUUID
         if let url = url, let clipIndex = commonContext.clips.firstIndex(where: { $0.url == url }) {
-            commonContext.clips[clipIndex].slateUUID = slateUUID
+            commonContext.clips[clipIndex].tabUUID = tabUUID
         }
         
         
-        currentSlateIndex = slates.count - 1
+        currentTabIndex = tabs.count - 1
         
     }
     
 
     
-    func addPerlexitySlate(query: String, searchEngine: String? = nil) {
+    func addPerlexityTab(query: String, searchEngine: String? = nil) {
         let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedText.isEmpty { return }
         
@@ -161,51 +161,51 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
         print(hasEntity)
         
         if count < 5 && hasEntity {
-            addGoogleSearchSlate(query: trimmedText)
+            addGoogleSearchTab(query: trimmedText)
 
         } else {
             
-            // Check for an existing Google search slate using the currentUrl key
-            if let existingGoogleSearchSlate = slates.first(where: { $0.currentUrl?.host == "www.perplexity.ai" && $0.currentUrl?.path == "/search" }) {
+            // Check for an existing Google search tab using the currentUrl key
+            if let existingGoogleSearchTab = tabs.first(where: { $0.currentUrl?.host == "www.perplexity.ai" && $0.currentUrl?.path == "/search" }) {
                 
-                // Replace the query for that slate's URL
+                // Replace the query for that tab's URL
                 let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                 if let newSearchURL = URL(string: "https://www.perplexity.ai/search?q=\(searchString)") {
-                    existingGoogleSearchSlate.webView?.load(URLRequest(url: newSearchURL))
+                    existingGoogleSearchTab.webView?.load(URLRequest(url: newSearchURL))
                 }
                 
-                // Jump to that slate
-                jumpToSlate(with: existingGoogleSearchSlate.slateUUID)
+                // Jump to that tab
+                jumpToTab(with: existingGoogleSearchTab.tabUUID)
             } else {
-                // If no existing Google search slate was found, then add a new slate as originally done
+                // If no existing Google search tab was found, then add a new tab as originally done
                 let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
                 let searchURL = URL(string: "https://www.perplexity.ai/search?q=\(searchString)")!
-                addNewSlate(url: searchURL)
+                addNewTab(url: searchURL)
             }
         }
     }
     
-    func addGoogleSearchSlate(query: String, searchEngine: String? = nil) {
+    func addGoogleSearchTab(query: String, searchEngine: String? = nil) {
         let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedText.isEmpty { return }
         
 
-        // Check for an existing Google search slate using the currentUrl key
-        if let existingGoogleSearchSlate = slates.first(where: { $0.currentUrl?.host == "www.google.com" && $0.currentUrl?.path == "/search" }) {
+        // Check for an existing Google search tab using the currentUrl key
+        if let existingGoogleSearchTab = tabs.first(where: { $0.currentUrl?.host == "www.google.com" && $0.currentUrl?.path == "/search" }) {
             
-            // Replace the query for that slate's URL
+            // Replace the query for that tab's URL
             let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             if let newSearchURL = URL(string: "https://www.google.com/search?q=\(searchString)") {
-                existingGoogleSearchSlate.webView?.load(URLRequest(url: newSearchURL))
+                existingGoogleSearchTab.webView?.load(URLRequest(url: newSearchURL))
             }
             
-            // Jump to that slate
-            jumpToSlate(with: existingGoogleSearchSlate.slateUUID)
+            // Jump to that tab
+            jumpToTab(with: existingGoogleSearchTab.tabUUID)
         } else {
-            // If no existing Google search slate was found, then add a new slate as originally done
+            // If no existing Google search tab was found, then add a new tab as originally done
             let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             let searchURL = URL(string: "https://www.google.com/search?q=\(searchString)")!
-            addNewSlate(url: searchURL)
+            addNewTab(url: searchURL)
         }
     }
     
@@ -214,70 +214,70 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 
 
   
-    func navSlateTimer() {
-        timeOnCurrentSlate = Date()
+    func navTabTimer() {
+        timeOnCurrentTab = Date()
         timer?.invalidate()
         timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: false) { [weak self] _ in
             guard let self = self else { return }
-            if let timeOnCurrentSlate = self.timeOnCurrentSlate, Date().timeIntervalSince(timeOnCurrentSlate) >= 3 {
-                // Check if the current slate is the last slate
-                if self.currentSlateIndex < self.slates.count - 1 {
-                    updateLastUsedTimestamp(for: self.currentSlateIndex)
-                    self.commonContext.shouldMoveCurrentSlateToLast = true
+            if let timeOnCurrentTab = self.timeOnCurrentTab, Date().timeIntervalSince(timeOnCurrentTab) >= 3 {
+                // Check if the current tab is the last tab
+                if self.currentTabIndex < self.tabs.count - 1 {
+                    updateLastUsedTimestamp(for: self.currentTabIndex)
+                    self.commonContext.shouldMoveCurrentTabToLast = true
                 }
             }
         }
     }
     
-    func moveCurrentSlateToLast(from index: Int) {
-        if commonContext.shouldMoveCurrentSlateToLast {
-            let slateToMove = slates.remove(at: index)
-            slates.append(slateToMove)
-            commonContext.shouldMoveCurrentSlateToLast = false
+    func moveCurrentTabToLast(from index: Int) {
+        if commonContext.shouldMoveCurrentTabToLast {
+            let tabToMove = tabs.remove(at: index)
+            tabs.append(tabToMove)
+            commonContext.shouldMoveCurrentTabToLast = false
             version += 1
         }
     }
 
-    func jumpToSlate(with UUID: UUID) {
-        if let slateIndex = slates.firstIndex(where: { $0.slateUUID == UUID }) {
-            commonContext.shouldMoveCurrentSlateToLast = false
+    func jumpToTab(with UUID: UUID) {
+        if let tabIndex = tabs.firstIndex(where: { $0.tabUUID == UUID }) {
+            commonContext.shouldMoveCurrentTabToLast = false
             commonContext.isAskViewActive = false
-//            print("Jump to slate invoked")
+//            print("Jump to tab invoked")
             
 //            withAnimation(.easeInOut) {
-                currentSlateIndex = slateIndex
+                currentTabIndex = tabIndex
 //            }
             
 //             Newly added cause timer no initiated or may be initiated and then bool changes to false
-            navSlateTimer()
+            navTabTimer()
         }
     }
     
     func updateLastUsedTimestamp(for index: Int) {
-        if index < slates.count {
-            slates[index].lastUsedTimestamp = Date() // Update the last used timestamp to the current time
+        if index < tabs.count {
+            tabs[index].lastUsedTimestamp = Date() // Update the last used timestamp to the current time
         }
     }
     
-    func updateIsThinkingState(for slateUUID: UUID, to state: Bool) {
-        if let slateIndex = slates.firstIndex(where: { $0.slateUUID == slateUUID }) {
-            slates[slateIndex].isThinking = state
+    func updateIsThinkingState(for tabUUID: UUID, to state: Bool) {
+        if let tabIndex = tabs.firstIndex(where: { $0.tabUUID == tabUUID }) {
+            tabs[tabIndex].isThinking = state
         }
     }
     
     
     func goBack() {
-        guard currentSlateIndex < slates.count else { return }
-        if slates[currentSlateIndex].webView?.canGoBack ?? false {
-            slates[currentSlateIndex].webView?.goBack()
+        guard currentTabIndex < tabs.count else { return }
+        if tabs[currentTabIndex].webView?.canGoBack ?? false {
+            tabs[currentTabIndex].webView?.goBack()
             objectWillChange.send()
         }
     }
 
     func goForward() {
-        guard currentSlateIndex < slates.count else { return }
-        if slates[currentSlateIndex].webView?.canGoForward ?? false {
-            slates[currentSlateIndex].webView?.goForward()
+        guard currentTabIndex < tabs.count else { return }
+        if tabs[currentTabIndex].webView?.canGoForward ?? false {
+            tabs[currentTabIndex].webView?.goForward()
             objectWillChange.send()
         }
     }
@@ -297,7 +297,7 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
         DispatchQueue.main.async { [weak self] in
             guard let self = self else { return }
             
-//            if let index = self.slates.firstIndex(where: { $0.webView == webView }) {
+//            if let index = self.tabs.firstIndex(where: { $0.webView == webView }) {
                 self.objectWillChange.send() // Notify SwiftUI to update the view
 //            }
         }
@@ -305,21 +305,21 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 
 
     
-    func reloadCurrentSlate() {
-        if currentSlateIndex < slates.count {
-            slates[currentSlateIndex].webView?.reload()
+    func reloadCurrentTab() {
+        if currentTabIndex < tabs.count {
+            tabs[currentTabIndex].webView?.reload()
         }
     }
 
     
-    func closeCurrentSlate() {
-        if currentSlateIndex >= 0 && currentSlateIndex < slates.count {
-            let uuid = slates[currentSlateIndex].slateUUID
+    func closeCurrentTab() {
+        if currentTabIndex >= 0 && currentTabIndex < tabs.count {
+            let uuid = tabs[currentTabIndex].tabUUID
 //            withAnimation(.easeInOut) {
-            if self.commonContext.shouldMoveCurrentSlateToLast == true {
-                moveCurrentSlateToLast(from: currentSlateIndex)
+            if self.commonContext.shouldMoveCurrentTabToLast == true {
+                moveCurrentTabToLast(from: currentTabIndex)
                 }
-            closeSlate(with: uuid)
+            closeTab(with: uuid)
 //            }
         }
     }
@@ -427,15 +427,15 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
     
 
     
-    func isSlateOld(_ slate: Slate) -> Bool {
-        // If the slate is the current one, it's not old
-        if slate.slateUUID == slates[currentSlateIndex].slateUUID {
+    func isTabOld(_ tab: Tab) -> Bool {
+        // If the tab is the current one, it's not old
+        if tab.tabUUID == tabs[currentTabIndex].tabUUID {
             return false
         }
         
-        // Check for any other slate if it's more than 6 hours old
+        // Check for any other tab if it's more than 6 hours old
         else {
-            return Date().timeIntervalSince(slate.lastUsedTimestamp) > 6 * 60 * 60
+            return Date().timeIntervalSince(tab.lastUsedTimestamp) > 6 * 60 * 60
         }
     }
 
@@ -443,21 +443,21 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 
 
 
-    func closeSlate(with uuid: UUID) {
-        if let index = slates.firstIndex(where: { $0.slateUUID == uuid }) {
-            slates.remove(at: index)
-            if currentSlateIndex > index {
-                currentSlateIndex -= 1
-            } else if !slates.isEmpty { // Check if there are other slates available
-                currentSlateIndex = min(currentSlateIndex, slates.count - 1) // Ensure currentSlateIndex is not out of range
+    func closeTab(with uuid: UUID) {
+        if let index = tabs.firstIndex(where: { $0.tabUUID == uuid }) {
+            tabs.remove(at: index)
+            if currentTabIndex > index {
+                currentTabIndex -= 1
+            } else if !tabs.isEmpty { // Check if there are other tabs available
+                currentTabIndex = min(currentTabIndex, tabs.count - 1) // Ensure currentTabIndex is not out of range
             } else {
-                currentSlateIndex = -1 // Indicate that there are no more slates
+                currentTabIndex = -1 // Indicate that there are no more tabs
             }
             
-            // Add this block to check and update any clips with matching slateUUID
+            // Add this block to check and update any clips with matching tabUUID
             for i in 0..<self.commonContext.clips.count {
-                if self.commonContext.clips[i].slateUUID == uuid {
-                    self.commonContext.clips[i].slateUUID = nil
+                if self.commonContext.clips[i].tabUUID == uuid {
+                    self.commonContext.clips[i].tabUUID = nil
                 }
             }
         }
@@ -465,10 +465,10 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
     
     
     private func clearOldCacheItems() {
-        for slate in slates.reversed() {
+        for tab in tabs.reversed() {
 
-            if isSlateOld(slate) {
-                closeSlate(with: slate.slateUUID)
+            if isTabOld(tab) {
+                closeTab(with: tab.tabUUID)
             }
         }
     }
@@ -482,7 +482,7 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 
         // Handle links opening in new target (_blank, etc.)
         if navigationAction.targetFrame == nil {
-            addNewSlate(url: url)
+            addNewTab(url: url)
             decisionHandler(.cancel)
             return
         }
@@ -545,14 +545,14 @@ class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKU
 
 
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        if let index = slates.firstIndex(where: { $0.webView == webView }) {
+        if let index = tabs.firstIndex(where: { $0.webView == webView }) {
             
-            var updateUrl = slates[index]
+            var updateUrl = tabs[index]
             
             updateUrl.currentUrl = webView.url // Update the newUrl
             
             
-            slates[index] = Slate(id: slates[index].id, slateUUID: slates[index].slateUUID, webView: webView, currentUrl: updateUrl.currentUrl, initialUrl: slates[index].initialUrl, timestamp: Date(), lastUsedTimestamp: Date(), isThinking: false)
+            tabs[index] = Tab(id: tabs[index].id, tabUUID: tabs[index].tabUUID, webView: webView, currentUrl: updateUrl.currentUrl, initialUrl: tabs[index].initialUrl, timestamp: Date(), lastUsedTimestamp: Date(), isThinking: false)
 
             
         } else if let isRedirected = secondaryWebViews[webView], let host = webView.url?.host {
@@ -630,7 +630,7 @@ extension TabManagerViewModel: WKScriptMessageHandler {
 
 
 
-protocol SlateManagerDelegate: AnyObject {
-    func updateIsThinkingState(for slateUUID: UUID, to state: Bool)
+protocol TabManagerDelegate: AnyObject {
+    func updateIsThinkingState(for tabUUID: UUID, to state: Bool)
 }
 

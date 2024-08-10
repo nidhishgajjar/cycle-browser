@@ -11,10 +11,10 @@ struct Item: Identifiable {
 
 
 struct TabView: View {
-    @EnvironmentObject var slateManager: TabManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     
-    @State private var switchClosSlateIcon: Bool = false
+    @State private var switchClosTabIcon: Bool = false
     @State private var isMovingUp: Bool = false
     @State private var isPassButtonLoading: Bool = false
     @Namespace private var transition
@@ -23,28 +23,27 @@ struct TabView: View {
     
 
     var body: some View {
-        let currentSlate = Binding<Int>(
-            get: { slateManager.currentSlateIndex },
+        let currentTab = Binding<Int>(
+            get: { tabManager.currentTabIndex },
             set: {
-                let safeIndex = min(max($0, 0), slateManager.slates.count - 1)
-                slateManager.currentSlateIndex = safeIndex
-//                slateManager.currentSlateIndex = $0
-                slateManager.updateLastUsedTimestamp(for: slateManager.currentSlateIndex)
-                if !commonContext.shouldMoveCurrentSlateToLast {
-                    slateManager.navSlateTimer()
+                let safeIndex = min(max($0, 0), tabManager.tabs.count - 1)
+                tabManager.currentTabIndex = safeIndex
+                tabManager.updateLastUsedTimestamp(for: tabManager.currentTabIndex)
+                if !commonContext.shouldMoveCurrentTabToLast {
+                    tabManager.navTabTimer()
                 } else {
-                    commonContext.shouldMoveCurrentSlateToLast = false
+                    commonContext.shouldMoveCurrentTabToLast = false
                 }
             }
         )
 
         return VStack (spacing: 0) {
-            if !slateManager.slates.isEmpty {
+            if !tabManager.tabs.isEmpty {
                 HStack {
                     ZStack {
-                        ForEach(slateManager.slates.indices, id: \.self) { index in
-                                if index == currentSlate.wrappedValue {
-                                    ChooseTypeOfTabView(tab: $slateManager.slates[index])
+                        ForEach(tabManager.tabs.indices, id: \.self) { index in
+                                if index == currentTab.wrappedValue {
+                                    ChooseTypeOfTabView(tab: $tabManager.tabs[index])
                                         .matchedGeometryEffect(id: "transition", in: transition)
                                         .transition(AnyTransition.asymmetric(insertion: .identity, removal: .move(edge: isMovingUp ? .top : .bottom)))
                                         .clipShape(RoundedCornersShape(topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0))
@@ -111,17 +110,17 @@ struct TabView: View {
                                 }
                             }
                         }
-                    }.id(slateManager.version)
+                    }.id(tabManager.version)
                     
                     VStack {
                         Spacer().frame(height: 5)
 
                         Button(action: {
-                            if slateManager.slates.count > 1 {
-                                  slateManager.closeCurrentSlate()
+                            if tabManager.tabs.count > 1 {
+                                  tabManager.closeCurrentTab()
                               }
                         }) {
-                            if switchClosSlateIcon {
+                            if switchClosTabIcon {
                                 Image(systemName: "xmark.circle.fill")
                                     .resizable()
                                     .foregroundColor(.red.opacity(0.7))
@@ -137,10 +136,10 @@ struct TabView: View {
                         }
                         .keyboardShortcut(KeyEquivalent("\\"), modifiers: .command)
                         .padding(EdgeInsets(top: 0, leading: -40, bottom: 0, trailing: 0))
-                        .opacity((slateManager.slates.count < 2 || (!commonContext.shouldMoveCurrentSlateToLast && currentSlate.wrappedValue != slateManager.slates.count - 1)) ? 0 : 1)
+                        .opacity((tabManager.tabs.count < 2 || (!commonContext.shouldMoveCurrentTabToLast && currentTab.wrappedValue != tabManager.tabs.count - 1)) ? 0 : 1)
                         .onHover{
                             hovering in
-                                switchClosSlateIcon = hovering
+                                switchClosTabIcon = hovering
                         }
                         .buttonStyle(PlainButtonStyle()) // Use a plain style to avoid the default button style
 
@@ -150,30 +149,30 @@ struct TabView: View {
                             Button(action: {
                                 isMovingUp = true
                                 withAnimation(.easeInOut) {
-                                    if commonContext.shouldMoveCurrentSlateToLast && currentSlate.wrappedValue < slateManager.slates.count - 1 {
-                                        slateManager.moveCurrentSlateToLast(from: currentSlate.wrappedValue)
-                                        currentSlate.wrappedValue = slateManager.slates.count - 2
-                                    } else if !commonContext.shouldMoveCurrentSlateToLast {
-                                        currentSlate.wrappedValue = max(currentSlate.wrappedValue - 1, 0)
+                                    if commonContext.shouldMoveCurrentTabToLast && currentTab.wrappedValue < tabManager.tabs.count - 1 {
+                                        tabManager.moveCurrentTabToLast(from: currentTab.wrappedValue)
+                                        currentTab.wrappedValue = tabManager.tabs.count - 2
+                                    } else if !commonContext.shouldMoveCurrentTabToLast {
+                                        currentTab.wrappedValue = max(currentTab.wrappedValue - 1, 0)
                                     }
                                 }
                             }) {
                                 Image(systemName: "arrow.up")
                             }
                             .padding(EdgeInsets(top: -22, leading: 0, bottom: 0, trailing: 0))
-                            .opacity((currentSlate.wrappedValue == 0 && !commonContext.shouldMoveCurrentSlateToLast) ? 0.01 : 1.0)
+                            .opacity((currentTab.wrappedValue == 0 && !commonContext.shouldMoveCurrentTabToLast) ? 0.01 : 1.0)
                             .keyboardShortcut(KeyEquivalent("j"), modifiers: .command)
 
                             Button(action: {
                                 isMovingUp = false
                                 withAnimation(.easeInOut) {
-                                    currentSlate.wrappedValue = min(currentSlate.wrappedValue + 1, slateManager.slates.count - 1)
+                                    currentTab.wrappedValue = min(currentTab.wrappedValue + 1, tabManager.tabs.count - 1)
                                 }
                             }) {
                                 Image(systemName: "arrow.down")
                             }
                             .padding(EdgeInsets(top: -3, leading: 0, bottom: 0, trailing: 0))
-                            .opacity((currentSlate.wrappedValue == slateManager.slates.count - 1 || commonContext.shouldMoveCurrentSlateToLast) ? 0.01 : 1.0)
+                            .opacity((currentTab.wrappedValue == tabManager.tabs.count - 1 || commonContext.shouldMoveCurrentTabToLast) ? 0.01 : 1.0)
                             .keyboardShortcut(KeyEquivalent("k"), modifiers: .command)
 
                         }
@@ -182,7 +181,7 @@ struct TabView: View {
                     }
                 }
             }
-            PaletteView(url: slateManager.slates[currentSlate.wrappedValue].url?.absoluteString ?? "")
+            PaletteView(url: tabManager.tabs[currentTab.wrappedValue].url?.absoluteString ?? "")
                 .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 39))
 
         }

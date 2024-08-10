@@ -9,9 +9,9 @@ import SwiftUI
 
 struct ErrorView: View {
     let errorCopyText: String
-    let slateUUID: UUID
+    let tabUUID: UUID
     @State var isCopied = false
-    @EnvironmentObject var slateManager : SlateManagerViewModel
+    @EnvironmentObject var tabManager : TabManagerViewModel
     @EnvironmentObject var commonContext : ContextViewModel
     
     @Environment(\.colorScheme) var colorScheme
@@ -74,9 +74,9 @@ struct ErrorView: View {
                     .buttonStyle(PlainButtonStyle())
                     
                     Button(action: {
-                        slateManager.addGoogleSearchSlate(query: errorCopyText)
+                        tabManager.addGoogleSearchTab(query: errorCopyText)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 15) {
-                            slateManager.closeSlate(with: slateUUID)
+                            tabManager.closeTab(with: tabUUID)
                         }
                     }) {
                         Image(systemName: "arrow.triangle.2.circlepath")
@@ -91,9 +91,9 @@ struct ErrorView: View {
 
                     
                     Button(action: {
-                        slateManager.addPerlexitySlate(query: errorCopyText)
+                        tabManager.addPerlexityTab(query: errorCopyText)
                         DispatchQueue.main.asyncAfter(deadline: .now() + 10) {
-                            slateManager.closeSlate(with: slateUUID)
+                            tabManager.closeTab(with: tabUUID)
                         }
                     }) {
                         Image(systemName: "magnifyingglass")

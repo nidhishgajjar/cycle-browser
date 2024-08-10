@@ -12,7 +12,7 @@ import Combine
 
 
 struct AutoSuggestView: View {
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     @ObservedObject var autoComplete = AutoSuggestViewModel()
     @State private var selectedIndex: Int = 5
@@ -117,9 +117,9 @@ struct AutoSuggestView: View {
         let suggestion = autoComplete.suggestions[index]
         
         if isURLFormat(suggestion), let url = URL(string: suggestion) {
-            slateManager.addNewSlate(url: url)
+            tabManager.addNewTab(url: url)
         } else {
-            slateManager.addPerlexitySlate(query: suggestion)
+            tabManager.addPerlexityTab(query: suggestion)
         }
         
         commonContext.askBarFocusedOnAGI.toggle()

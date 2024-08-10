@@ -12,7 +12,7 @@ struct AskScigicButton: View {
     let url: String
     
     @State private var showQuery: Bool = false
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     
     // Check if the URL is a valid Google search URL
     var isValidGoogleURL: Bool {
@@ -31,8 +31,8 @@ struct AskScigicButton: View {
     
     var body: some View {
         Button(action: {
-            slateManager.closeCurrentSlate()
-            slateManager.addPerlexitySlate(query: extractedQuery)
+            tabManager.closeCurrentTab()
+            tabManager.addPerlexityTab(query: extractedQuery)
         }) {
             HStack {
                 Group {

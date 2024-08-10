@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var lastKnownPosition = [String: NSPoint]()
     var hotKeyViewModel: ShortcutViewModel!
     var commonContext: ContextViewModel!
-    var slateManager: SlateManagerViewModel
+    var tabManager: TabManagerViewModel
     var autoSuggestViewModel: AutoSuggestViewModel
     private var loginStatusCancellable: AnyCancellable?
 
@@ -27,7 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         commonContext = ContextViewModel()
         autoSuggestViewModel = AutoSuggestViewModel()
         
-        self.slateManager = SlateManagerViewModel(context: commonContext)
+        self.tabManager = TabManagerViewModel(context: commonContext)
         
         
         
@@ -55,7 +55,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         mainWindow.collectionBehavior.insert(.moveToActiveSpace)
         mainWindow.center()
         mainWindow.setFrameAutosaveName("Scigic")
-        mainWindow.contentView = NSHostingView(rootView: ContentView().environmentObject(commonContext).environmentObject(slateManager).environmentObject(autoSuggestViewModel))
+        mainWindow.contentView = NSHostingView(rootView: ContentView().environmentObject(commonContext).environmentObject(tabManager).environmentObject(autoSuggestViewModel))
         mainWindow.backgroundColor = NSColor.clear
 
         mainWindow.orderOut(nil)

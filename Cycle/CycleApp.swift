@@ -8,7 +8,7 @@ import SwiftUI
 import Sparkle
 
 @main
-struct ScigicApp: App {
+struct CycleApp: App {
     
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
     

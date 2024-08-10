@@ -6,7 +6,7 @@ import SwiftUI
 
 struct PaletteView: View {
     @EnvironmentObject var commonContext: ContextViewModel
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     @State var textFieldHeight: CGFloat = 30
     @State private var isPassButtonLoading: Bool = false
     let url: String
@@ -18,7 +18,7 @@ struct PaletteView: View {
             VStack (spacing: 0){
                 HStack {
                     AskBarView(text:$commonContext.askTextFromPalette, height: $textFieldHeight)
-                        .environmentObject(slateManager)
+                        .environmentObject(tabManager)
                         .frame(maxHeight: textFieldHeight > 100 ? min(textFieldHeight, 24) : textFieldHeight)
                     
                     if !url.isEmpty && AskScigicButton(url: url).isValidGoogleURL {

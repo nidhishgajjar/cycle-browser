@@ -7,13 +7,13 @@ import SwiftUI
 
 
 struct ThinkingView: View {
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     @State private var displayText: String? = nil
     @State private var copied = false
 
     let errorCopyText: String
-    let slateUUID: UUID
+    let tabUUID: UUID
 
     @Environment(\.colorScheme) var colorScheme
 
@@ -25,7 +25,7 @@ struct ThinkingView: View {
                 )
 
             if let text = displayText {
-                ErrorView(errorCopyText: text, slateUUID: slateUUID)
+                ErrorView(errorCopyText: text, tabUUID: tabUUID)
                     .padding(10)
             } else {
                 Image(systemName: "circle.dotted")

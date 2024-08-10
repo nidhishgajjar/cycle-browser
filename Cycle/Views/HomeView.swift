@@ -14,8 +14,8 @@ struct HomeView: View {
 
     var body: some View {
         ZStack {
-            // Always show the SlateView
-            SlateView()
+            // Always show the TabView
+            TabView()
             
 
             // Conditionally show the AskView

@@ -12,7 +12,7 @@
 //
 //    var body: some View {
 //        if authManager.isAuthLoading {
-//            ThinkingView(errorCopyText: "Login failure 5673", slateUUID: UUID())
+//            ThinkingView(errorCopyText: "Login failure 5673", tabUUID: UUID())
 //        } else {
 //            ZStack {
 //                VisualBlurEffect(material: .sidebar)

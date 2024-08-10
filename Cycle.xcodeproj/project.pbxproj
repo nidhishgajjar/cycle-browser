@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		C2291C882A9840F7003ED738 /* AutoUpdateService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2291C872A9840F7003ED738 /* AutoUpdateService.swift */; };
-		C27A59172A676FBA0058CA02 /* ScigicApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59162A676FBA0058CA02 /* ScigicApp.swift */; };
+		C27A59172A676FBA0058CA02 /* CycleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59162A676FBA0058CA02 /* CycleApp.swift */; };
 		C27A59192A676FBA0058CA02 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59182A676FBA0058CA02 /* ContentView.swift */; };
 		C27A591B2A676FBC0058CA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27A591A2A676FBC0058CA02 /* Assets.xcassets */; };
 		C27A591E2A676FBC0058CA02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27A591D2A676FBC0058CA02 /* Preview Assets.xcassets */; };
@@ -25,8 +25,8 @@
 		C27A594C2A6771E80058CA02 /* BackForwardButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59482A6771E80058CA02 /* BackForwardButtons.swift */; };
 		C27A594D2A6771E80058CA02 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59492A6771E80058CA02 /* PaletteView.swift */; };
 		C27A595F2A67720E0058CA02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A595E2A67720E0058CA02 /* SettingsView.swift */; };
-		C27A59652A67721F0058CA02 /* SlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59602A67721E0058CA02 /* SlateView.swift */; };
-		C27A59662A67721F0058CA02 /* ChooseTypeOfSlateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59612A67721E0058CA02 /* ChooseTypeOfSlateView.swift */; };
+		C27A59652A67721F0058CA02 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59602A67721E0058CA02 /* TabView.swift */; };
+		C27A59662A67721F0058CA02 /* ChooseTypeOfTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59612A67721E0058CA02 /* ChooseTypeOfTabView.swift */; };
 		C27A59672A67721F0058CA02 /* ThinkingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59622A67721E0058CA02 /* ThinkingView.swift */; };
 		C27A59682A67721F0058CA02 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59632A67721E0058CA02 /* WebView.swift */; };
 		C27A596B2A6772370058CA02 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A596A2A6772370058CA02 /* AuthManager.swift */; };
@@ -37,7 +37,7 @@
 		C27A59772A6772B50058CA02 /* VisualEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59722A6772B50058CA02 /* VisualEffects.swift */; };
 		C27A597B2A6772C80058CA02 /* ShortcutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59782A6772C80058CA02 /* ShortcutViewModel.swift */; };
 		C27A597C2A6772C80058CA02 /* ContextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59792A6772C80058CA02 /* ContextViewModel.swift */; };
-		C27A597D2A6772C80058CA02 /* SlateManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A597A2A6772C80058CA02 /* SlateManagerViewModel.swift */; };
+		C27A597D2A6772C80058CA02 /* TabManagerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A597A2A6772C80058CA02 /* TabManagerViewModel.swift */; };
 		C27A59812A6773660058CA02 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A597E2A6773660058CA02 /* SignUpView.swift */; };
 		C27A59822A6773660058CA02 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A597F2A6773660058CA02 /* LoginView.swift */; };
 		C27A59832A6773660058CA02 /* VerifyEmailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59802A6773660058CA02 /* VerifyEmailView.swift */; };
@@ -57,8 +57,8 @@
 
 /* Begin PBXFileReference section */
 		C2291C872A9840F7003ED738 /* AutoUpdateService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoUpdateService.swift; sourceTree = "<group>"; };
-		C27A59132A676FBA0058CA02 /* Scigic.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scigic.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		C27A59162A676FBA0058CA02 /* ScigicApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScigicApp.swift; sourceTree = "<group>"; };
+		C27A59132A676FBA0058CA02 /* Cycle.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Cycle.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C27A59162A676FBA0058CA02 /* CycleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CycleApp.swift; sourceTree = "<group>"; };
 		C27A59182A676FBA0058CA02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C27A591A2A676FBC0058CA02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C27A591D2A676FBC0058CA02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -75,8 +75,8 @@
 		C27A59482A6771E80058CA02 /* BackForwardButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackForwardButtons.swift; sourceTree = "<group>"; };
 		C27A59492A6771E80058CA02 /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		C27A595E2A67720E0058CA02 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		C27A59602A67721E0058CA02 /* SlateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlateView.swift; sourceTree = "<group>"; };
-		C27A59612A67721E0058CA02 /* ChooseTypeOfSlateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTypeOfSlateView.swift; sourceTree = "<group>"; };
+		C27A59602A67721E0058CA02 /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		C27A59612A67721E0058CA02 /* ChooseTypeOfTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTypeOfTabView.swift; sourceTree = "<group>"; };
 		C27A59622A67721E0058CA02 /* ThinkingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThinkingView.swift; sourceTree = "<group>"; };
 		C27A59632A67721E0058CA02 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		C27A596A2A6772370058CA02 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
@@ -87,7 +87,7 @@
 		C27A59722A6772B50058CA02 /* VisualEffects.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualEffects.swift; sourceTree = "<group>"; };
 		C27A59782A6772C80058CA02 /* ShortcutViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShortcutViewModel.swift; sourceTree = "<group>"; };
 		C27A59792A6772C80058CA02 /* ContextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContextViewModel.swift; sourceTree = "<group>"; };
-		C27A597A2A6772C80058CA02 /* SlateManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SlateManagerViewModel.swift; sourceTree = "<group>"; };
+		C27A597A2A6772C80058CA02 /* TabManagerViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabManagerViewModel.swift; sourceTree = "<group>"; };
 		C27A597E2A6773660058CA02 /* SignUpView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		C27A597F2A6773660058CA02 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		C27A59802A6773660058CA02 /* VerifyEmailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerifyEmailView.swift; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		C27A590A2A676FBA0058CA02 = {
 			isa = PBXGroup;
 			children = (
-				C27A59152A676FBA0058CA02 /* Scigic */,
+				C27A59152A676FBA0058CA02 /* Cycle */,
 				C27A59142A676FBA0058CA02 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -128,12 +128,12 @@
 		C27A59142A676FBA0058CA02 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				C27A59132A676FBA0058CA02 /* Scigic.app */,
+				C27A59132A676FBA0058CA02 /* Cycle.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		C27A59152A676FBA0058CA02 /* Scigic */ = {
+		C27A59152A676FBA0058CA02 /* Cycle */ = {
 			isa = PBXGroup;
 			children = (
 				C27A59332A67710B0058CA02 /* Tools */,
@@ -142,14 +142,14 @@
 				C27A59302A6770D80058CA02 /* Authentication */,
 				C27A592F2A6770CD0058CA02 /* Views */,
 				C27A59352A6771280058CA02 /* ViewModels */,
-				C27A59162A676FBA0058CA02 /* ScigicApp.swift */,
+				C27A59162A676FBA0058CA02 /* CycleApp.swift */,
 				C27A591A2A676FBC0058CA02 /* Assets.xcassets */,
 				C27A591F2A676FBC0058CA02 /* scigic.entitlements */,
 				C27A59252A676FDC0058CA02 /* GoogleService-Info.plist */,
 				C27A591C2A676FBC0058CA02 /* Preview Content */,
 				C27A592D2A67705B0058CA02 /* AppDelegate.swift */,
 			);
-			path = Scigic;
+			path = Cycle;
 			sourceTree = "<group>";
 		};
 		C27A591C2A676FBC0058CA02 /* Preview Content */ = {
@@ -228,7 +228,7 @@
 			children = (
 				C27A59792A6772C80058CA02 /* ContextViewModel.swift */,
 				C27A59782A6772C80058CA02 /* ShortcutViewModel.swift */,
-				C27A597A2A6772C80058CA02 /* SlateManagerViewModel.swift */,
+				C27A597A2A6772C80058CA02 /* TabManagerViewModel.swift */,
 				C2A389D42A89B62F00B4B47F /* AutoSuggestViewModel.swift */,
 			);
 			path = ViewModels;
@@ -270,8 +270,8 @@
 		C27A593D2A67718A0058CA02 /* Slate */ = {
 			isa = PBXGroup;
 			children = (
-				C27A59612A67721E0058CA02 /* ChooseTypeOfSlateView.swift */,
-				C27A59602A67721E0058CA02 /* SlateView.swift */,
+				C27A59612A67721E0058CA02 /* ChooseTypeOfTabView.swift */,
+				C27A59602A67721E0058CA02 /* TabView.swift */,
 				C27A59622A67721E0058CA02 /* ThinkingView.swift */,
 				C27A59632A67721E0058CA02 /* WebView.swift */,
 				C2874B772A95A4C000A9F4B1 /* ErrorView.swift */,
@@ -282,9 +282,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		C27A59122A676FBA0058CA02 /* Scigic */ = {
+		C27A59122A676FBA0058CA02 /* Cycle */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = C27A59222A676FBC0058CA02 /* Build configuration list for PBXNativeTarget "Scigic" */;
+			buildConfigurationList = C27A59222A676FBC0058CA02 /* Build configuration list for PBXNativeTarget "Cycle" */;
 			buildPhases = (
 				C27A590F2A676FBA0058CA02 /* Sources */,
 				C27A59102A676FBA0058CA02 /* Frameworks */,
@@ -294,7 +294,7 @@
 			);
 			dependencies = (
 			);
-			name = Scigic;
+			name = Cycle;
 			packageProductDependencies = (
 				C27A59282A676FE90058CA02 /* HotKey */,
 				C2A4B1F62A79DEFD001334D5 /* Markdown */,
@@ -302,7 +302,7 @@
 				C2CD96F62A81BCB900EA1141 /* Sparkle */,
 			);
 			productName = scigic;
-			productReference = C27A59132A676FBA0058CA02 /* Scigic.app */;
+			productReference = C27A59132A676FBA0058CA02 /* Cycle.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -320,7 +320,7 @@
 					};
 				};
 			};
-			buildConfigurationList = C27A590E2A676FBA0058CA02 /* Build configuration list for PBXProject "Scigic" */;
+			buildConfigurationList = C27A590E2A676FBA0058CA02 /* Build configuration list for PBXProject "Cycle" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -339,7 +339,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				C27A59122A676FBA0058CA02 /* Scigic */,
+				C27A59122A676FBA0058CA02 /* Cycle */,
 			);
 		};
 /* End PBXProject section */
@@ -383,17 +383,17 @@
 				C27A59822A6773660058CA02 /* LoginView.swift in Sources */,
 				C27A594A2A6771E80058CA02 /* URLButton.swift in Sources */,
 				C2A4B1FC2A79E038001334D5 /* MarkdownAttributedStringParser.swift in Sources */,
-				C27A59652A67721F0058CA02 /* SlateView.swift in Sources */,
-				C27A597D2A6772C80058CA02 /* SlateManagerViewModel.swift in Sources */,
+				C27A59652A67721F0058CA02 /* TabView.swift in Sources */,
+				C27A597D2A6772C80058CA02 /* TabManagerViewModel.swift in Sources */,
 				C27A597C2A6772C80058CA02 /* ContextViewModel.swift in Sources */,
 				C27A59762A6772B50058CA02 /* RoundedCornersShape.swift in Sources */,
 				C27A59752A6772B50058CA02 /* MainWindow.swift in Sources */,
 				C2874B782A95A4C000A9F4B1 /* ErrorView.swift in Sources */,
 				C2A4B1FE2A79E309001334D5 /* ParserResult.swift in Sources */,
-				C27A59662A67721F0058CA02 /* ChooseTypeOfSlateView.swift in Sources */,
+				C27A59662A67721F0058CA02 /* ChooseTypeOfTabView.swift in Sources */,
 				C27A59772A6772B50058CA02 /* VisualEffects.swift in Sources */,
 				C2291C882A9840F7003ED738 /* AutoUpdateService.swift in Sources */,
-				C27A59172A676FBA0058CA02 /* ScigicApp.swift in Sources */,
+				C27A59172A676FBA0058CA02 /* CycleApp.swift in Sources */,
 				C27A59832A6773660058CA02 /* VerifyEmailView.swift in Sources */,
 				C27A594B2A6771E80058CA02 /* NavButtons.swift in Sources */,
 				C27A59732A6772B50058CA02 /* CanvasStyling.swift in Sources */,
@@ -599,7 +599,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		C27A590E2A676FBA0058CA02 /* Build configuration list for PBXProject "Scigic" */ = {
+		C27A590E2A676FBA0058CA02 /* Build configuration list for PBXProject "Cycle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C27A59202A676FBC0058CA02 /* Debug */,
@@ -608,7 +608,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		C27A59222A676FBC0058CA02 /* Build configuration list for PBXNativeTarget "Scigic" */ = {
+		C27A59222A676FBC0058CA02 /* Build configuration list for PBXNativeTarget "Cycle" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				C27A59232A676FBC0058CA02 /* Debug */,
