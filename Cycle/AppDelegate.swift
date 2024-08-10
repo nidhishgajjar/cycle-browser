@@ -18,17 +18,13 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     var hotKeyViewModel: ShortcutViewModel!
     var commonContext: ContextViewModel!
     var slateManager: SlateManagerViewModel
-//    var webSocketService: WebSocketService!
-//    var passwordManagerService: PasswordManagerService
     var autoSuggestViewModel: AutoSuggestViewModel
     private var loginStatusCancellable: AnyCancellable?
 
 
     override init() {
 //        authManager = AuthManager()
-//        webSocketService = WebSocketService(authManager: authManager)
         commonContext = ContextViewModel()
-//        passwordManagerService = PasswordManagerService()
         autoSuggestViewModel = AutoSuggestViewModel()
         
         self.slateManager = SlateManagerViewModel(context: commonContext)
@@ -39,23 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         super.init()
         hotKeyViewModel = ShortcutViewModel(toggleWindow: toggleMainWindow)
         
-//        loginStatusCancellable = authManager.$isUserLoggedIn
-//            .filter { $0 == true } // Only proceed when the user logs in
-//            .sink { [weak self] _ in
-////                self?.webSocketService.checkSubscriptionStatus() // Replace with the actual method name
-////                self?.webSocketService.startSubscriptionCheckTimer()
-////                self?.webSocketService.startHealthCheckTimer()
-////                self?.webSocketService.connect()
-//                
-//                DispatchQueue.global(qos: .background).async {
-//                    self?.webSocketService.checkSubscriptionStatus()
-//                    self?.webSocketService.startSubscriptionCheckTimer()
-//                    self?.webSocketService.startHealthCheckTimer()
-//                    self?.webSocketService.connect()
-//                }
-//
-//
-//            }
 
     }
     
@@ -93,9 +72,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         
         if !mainWindow.isVisible {
-//            DispatchQueue.global(qos: .background).async {
-//                self.webSocketService.checkSubscriptionStatus()
-//            }
             // Show mainWindow
             toggleMainWindow()
         }

@@ -15,7 +15,6 @@ struct ScigicApp: App {
     // Add updater manager
     @ObservedObject private var updaterManager = UpdaterManager()
     
-//    @EnvironmentObject var webSocketService: WebSocketService
     
     init() {
         

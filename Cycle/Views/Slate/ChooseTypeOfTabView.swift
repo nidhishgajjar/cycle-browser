@@ -4,9 +4,9 @@
 
 import SwiftUI
 
-struct ChooseTypeOfSlateView: View {
-    @Binding var slate: SlateManagerViewModel.Slate
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+struct ChooseTypeOfTabView: View {
+    @Binding var slate: TabManagerViewModel.Slate
+    @EnvironmentObject var slateManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     @FocusState private var webviewFocused: Bool // Add @FocusState property
 

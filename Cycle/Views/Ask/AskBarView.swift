@@ -97,14 +97,6 @@ struct MultilineTextField: NSViewRepresentable {
                     if trimmedText.isEmpty { return false }
 
 
-//                    let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-
-//                    if trimmedText.hasPrefix("https://") || trimmedText.hasPrefix("http://") {
-//                        if let url = URL(string: trimmedText) {
-//                            parent.slateManager.addNewSlate(url: url)
-//                        }
-//                        
-//                    } 
                     
                     if trimmedText.hasPrefix("https://") || trimmedText.hasPrefix("http://") || isValidWebsiteName(trimmedText) {
                         if !trimmedText.hasPrefix("https://") && !trimmedText.hasPrefix("http://") {

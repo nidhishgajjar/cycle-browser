@@ -8,7 +8,7 @@ import NaturalLanguage
 import Foundation
 
 
-class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKUIDelegate {
+class TabManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, WKUIDelegate {
 
     struct Slate: Identifiable {
         let id: UUID
@@ -28,8 +28,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
     @Published var currentSlateIndex: Int = 0
     @Published var version: Int = 0
     
-//    var webSocketService: WebSocketService
-//    var passwordManagerService: PasswordManagerService
     var commonContext: ContextViewModel
     var timeOnCurrentSlate: Date?
     var timer: Timer?
@@ -156,9 +154,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedText.isEmpty { return }
         
-//        print(slates)
-        
-        
         let count = wordCount(trimmedText)
         let hasEntity = containsEntity(in: trimmedText)
     
@@ -166,7 +161,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         print(hasEntity)
         
         if count < 5 && hasEntity {
-//            self.closeCurrentSlate()
             addGoogleSearchSlate(query: trimmedText)
 
         } else {
@@ -195,7 +189,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
         if trimmedText.isEmpty { return }
         
-//        print(slates)
 
         // Check for an existing Google search slate using the currentUrl key
         if let existingGoogleSearchSlate = slates.first(where: { $0.currentUrl?.host == "www.google.com" && $0.currentUrl?.path == "/search" }) {
@@ -217,41 +210,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
     }
     
     
-//    func addPerlexitySlate(query: String, searchEngine: String? = nil) {
-//        let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if trimmedText.isEmpty { return }
-//
-//        let count = wordCount(trimmedText)
-//        let hasEntity = containsEntity(in: trimmedText)
-//
-//        if count < 5 && hasEntity {
-////            self.closeCurrentSlate()
-//            addGoogleSearchSlate(query: trimmedText)
-//        } else {
-//            processSearchSlate(trimmedText: trimmedText, host: "www.perplexity.ai", path: "/search", baseSearchURL: "https://www.perplexity.ai/search?q=")
-//        }
-//    }
-//
-//    func addGoogleSearchSlate(query: String, searchEngine: String? = nil) {
-//        let trimmedText = query.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if trimmedText.isEmpty { return }
-//
-//        processSearchSlate(trimmedText: trimmedText, host: "www.google.com", path: "/search", baseSearchURL: "https://www.google.com/search?q=")
-//    }
-//
-//    func processSearchSlate(trimmedText: String, host: String, path: String, baseSearchURL: String) {
-//        if let existingSearchSlate = slates.first(where: { $0.currentUrl?.host == host && $0.currentUrl?.path == path }) {
-//            let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-//            if let newSearchURL = URL(string: "\(baseSearchURL)\(searchString)") {
-//                existingSearchSlate.webView?.load(URLRequest(url: newSearchURL))
-//            }
-//            jumpToSlate(with: existingSearchSlate.slateUUID)
-//        } else {
-//            let searchString = trimmedText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-//            let searchURL = URL(string: "\(baseSearchURL)\(searchString)")!
-//            addNewSlate(url: searchURL)
-//        }
-//    }
 
 
 
@@ -371,7 +329,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         let preferences = WKPreferences()
         let configuration = WKWebViewConfiguration()
         configuration.preferences = preferences
-//        configuration.dataDetectorTypes = [.all]
         configuration.userContentController.add(self, name: "inputFieldInFocus")
         configuration.processPool = WKProcessPool()
 
@@ -388,9 +345,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
 
 
         webView.uiDelegate = self
-
-//        let magnify = NSMagnificationGestureRecognizer(target: self, action: #selector(magnifyWithGestureRecognizer(_:)))
-//        webView.addGestureRecognizer(magnify)
 
 
 
@@ -472,18 +426,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
 
     
 
-
-
-
-
-//    func isSlateOld(_ slate: Slate) -> Bool {
-//        if slate.slateUUID == slates[currentSlateIndex].slateUUID {
-//            return false
-//        } else {
-//            // Your current logic for determining if a slate is old
-//            return Date().timeIntervalSince(slate.lastUsedTimestamp) > 6 * 60 * 60
-//        }
-//    }
     
     func isSlateOld(_ slate: Slate) -> Bool {
         // If the slate is the current one, it's not old
@@ -531,17 +473,6 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
         }
     }
 
-    
-    
-//    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-//        if navigationAction.targetFrame == nil, let url = navigationAction.request.url {
-//            // Open in new slate
-//            addNewSlate(url: url)
-//            decisionHandler(.cancel)
-//        } else {
-//            decisionHandler(.allow)
-//        }
-//    }
     
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else {
@@ -622,10 +553,8 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
             
             
             slates[index] = Slate(id: slates[index].id, slateUUID: slates[index].slateUUID, webView: webView, currentUrl: updateUrl.currentUrl, initialUrl: slates[index].initialUrl, timestamp: Date(), lastUsedTimestamp: Date(), isThinking: false)
+
             
-//            if let url = webView.url, url.absoluteString.starts(with: "https://constitute.ai") {
-//                handleAuthRedirectURL(url)
-//            }
         } else if let isRedirected = secondaryWebViews[webView], let host = webView.url?.host {
             if isRedirected && !oauthProviders.contains(host) {
                 // The WebView has been redirected to an OAuth provider, and now it's redirected again to a non-OAuth URL, so we remove it
@@ -679,7 +608,7 @@ class SlateManagerViewModel: NSObject, ObservableObject, WKNavigationDelegate, W
 
 }
 
-extension SlateManagerViewModel: WKScriptMessageHandler {
+extension TabManagerViewModel: WKScriptMessageHandler {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         if message.name == "inputFieldInFocus" {
             if let body = message.body as? [String: Any], let focus = body["focus"] as? Bool {

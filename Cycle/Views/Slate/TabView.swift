@@ -10,8 +10,8 @@ struct Item: Identifiable {
 }
 
 
-struct SlateView: View {
-    @EnvironmentObject var slateManager: SlateManagerViewModel
+struct TabView: View {
+    @EnvironmentObject var slateManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     
     @State private var switchClosSlateIcon: Bool = false
@@ -44,7 +44,7 @@ struct SlateView: View {
                     ZStack {
                         ForEach(slateManager.slates.indices, id: \.self) { index in
                                 if index == currentSlate.wrappedValue {
-                                    ChooseTypeOfSlateView(slate: $slateManager.slates[index])
+                                    ChooseTypeOfTabView(tab: $slateManager.slates[index])
                                         .matchedGeometryEffect(id: "transition", in: transition)
                                         .transition(AnyTransition.asymmetric(insertion: .identity, removal: .move(edge: isMovingUp ? .top : .bottom)))
                                         .clipShape(RoundedCornersShape(topLeft: 10, topRight: 10, bottomLeft: 0, bottomRight: 0))
