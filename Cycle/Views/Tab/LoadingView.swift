@@ -6,7 +6,7 @@ import SwiftUI
 
 
 
-struct ThinkingView: View {
+struct LoadingView: View {
     @EnvironmentObject var tabManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     @State private var displayText: String? = nil
