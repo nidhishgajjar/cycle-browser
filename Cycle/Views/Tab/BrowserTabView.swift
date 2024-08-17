@@ -10,7 +10,7 @@ struct Item: Identifiable {
 }
 
 
-struct TabView: View {
+struct BrowserTabView: View {
     @EnvironmentObject var tabManager: TabManagerViewModel
     @EnvironmentObject var commonContext: ContextViewModel
     
