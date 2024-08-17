@@ -29,7 +29,7 @@ struct CycleApp: App {
 
     var body: some Scene {
         MenuBarExtra("", systemImage: "circle.dotted") {
-            Button("Scigic") {
+            Button("Switch") {
                 appDelegate.toggleMainWindow()
             }
             Button("Settings") {

@@ -13,7 +13,6 @@
 		C27A591B2A676FBC0058CA02 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27A591A2A676FBC0058CA02 /* Assets.xcassets */; };
 		C27A591E2A676FBC0058CA02 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C27A591D2A676FBC0058CA02 /* Preview Assets.xcassets */; };
 		C27A59262A676FDD0058CA02 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C27A59252A676FDC0058CA02 /* GoogleService-Info.plist */; };
-		C27A59292A676FE90058CA02 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = C27A59282A676FE90058CA02 /* HotKey */; };
 		C27A592E2A67705B0058CA02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A592D2A67705B0058CA02 /* AppDelegate.swift */; };
 		C27A59372A67714F0058CA02 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59362A67714F0058CA02 /* HomeView.swift */; };
 		C27A59422A6771CE0058CA02 /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A593E2A6771CE0058CA02 /* AskView.swift */; };
@@ -25,7 +24,7 @@
 		C27A594C2A6771E80058CA02 /* BackForwardButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59482A6771E80058CA02 /* BackForwardButtons.swift */; };
 		C27A594D2A6771E80058CA02 /* PaletteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59492A6771E80058CA02 /* PaletteView.swift */; };
 		C27A595F2A67720E0058CA02 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A595E2A67720E0058CA02 /* SettingsView.swift */; };
-		C27A59652A67721F0058CA02 /* TabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59602A67721E0058CA02 /* TabView.swift */; };
+		C27A59652A67721F0058CA02 /* BrowserTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59602A67721E0058CA02 /* BrowserTabView.swift */; };
 		C27A59662A67721F0058CA02 /* ChooseTypeOfTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59612A67721E0058CA02 /* ChooseTypeOfTabView.swift */; };
 		C27A59672A67721F0058CA02 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59622A67721E0058CA02 /* LoadingView.swift */; };
 		C27A59682A67721F0058CA02 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C27A59632A67721E0058CA02 /* WebView.swift */; };
@@ -44,12 +43,11 @@
 		C2A389D52A89B62F00B4B47F /* AutoSuggestViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A389D42A89B62F00B4B47F /* AutoSuggestViewModel.swift */; };
 		C2A389D72A8AEBF900B4B47F /* AutoSuggestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A389D62A8AEBF900B4B47F /* AutoSuggestView.swift */; };
 		C2A389D92A8D9D7D00B4B47F /* SuggestionItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A389D82A8D9D7D00B4B47F /* SuggestionItemView.swift */; };
-		C2A4B1F72A79DEFD001334D5 /* Markdown in Frameworks */ = {isa = PBXBuildFile; productRef = C2A4B1F62A79DEFD001334D5 /* Markdown */; };
-		C2A4B1FA2A79DF26001334D5 /* Highlighter in Frameworks */ = {isa = PBXBuildFile; productRef = C2A4B1F92A79DF26001334D5 /* Highlighter */; };
 		C2A4B1FC2A79E038001334D5 /* MarkdownAttributedStringParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4B1FB2A79E038001334D5 /* MarkdownAttributedStringParser.swift */; };
 		C2A4B1FE2A79E309001334D5 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4B1FD2A79E309001334D5 /* ParserResult.swift */; };
 		C2A4B2022A79E61F001334D5 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4B2012A79E61F001334D5 /* CodeBlockView.swift */; };
-		C2CD96F72A81BCB900EA1141 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = C2CD96F62A81BCB900EA1141 /* Sparkle */; };
+		C2F970DA2C713A5700433E8D /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = C2F970D92C713A5700433E8D /* Sparkle */; };
+		C2F970DD2C713A6200433E8D /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = C2F970DC2C713A6200433E8D /* HotKey */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,7 +57,7 @@
 		C27A59182A676FBA0058CA02 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		C27A591A2A676FBC0058CA02 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C27A591D2A676FBC0058CA02 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		C27A591F2A676FBC0058CA02 /* scigic.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = scigic.entitlements; sourceTree = "<group>"; };
+		C27A591F2A676FBC0058CA02 /* cycle.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = cycle.entitlements; sourceTree = "<group>"; };
 		C27A59252A676FDC0058CA02 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C27A592D2A67705B0058CA02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C27A59362A67714F0058CA02 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -72,7 +70,7 @@
 		C27A59482A6771E80058CA02 /* BackForwardButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackForwardButtons.swift; sourceTree = "<group>"; };
 		C27A59492A6771E80058CA02 /* PaletteView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaletteView.swift; sourceTree = "<group>"; };
 		C27A595E2A67720E0058CA02 /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		C27A59602A67721E0058CA02 /* TabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabView.swift; sourceTree = "<group>"; };
+		C27A59602A67721E0058CA02 /* BrowserTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BrowserTabView.swift; sourceTree = "<group>"; };
 		C27A59612A67721E0058CA02 /* ChooseTypeOfTabView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseTypeOfTabView.swift; sourceTree = "<group>"; };
 		C27A59622A67721E0058CA02 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		C27A59632A67721E0058CA02 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
@@ -101,10 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2CD96F72A81BCB900EA1141 /* Sparkle in Frameworks */,
-				C2A4B1F72A79DEFD001334D5 /* Markdown in Frameworks */,
-				C27A59292A676FE90058CA02 /* HotKey in Frameworks */,
-				C2A4B1FA2A79DF26001334D5 /* Highlighter in Frameworks */,
+				C2F970DD2C713A6200433E8D /* HotKey in Frameworks */,
+				C2F970DA2C713A5700433E8D /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,7 +134,7 @@
 				C27A59352A6771280058CA02 /* ViewModels */,
 				C27A59162A676FBA0058CA02 /* CycleApp.swift */,
 				C27A591A2A676FBC0058CA02 /* Assets.xcassets */,
-				C27A591F2A676FBC0058CA02 /* scigic.entitlements */,
+				C27A591F2A676FBC0058CA02 /* cycle.entitlements */,
 				C27A59252A676FDC0058CA02 /* GoogleService-Info.plist */,
 				C27A591C2A676FBC0058CA02 /* Preview Content */,
 				C27A592D2A67705B0058CA02 /* AppDelegate.swift */,
@@ -254,7 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				C27A59612A67721E0058CA02 /* ChooseTypeOfTabView.swift */,
-				C27A59602A67721E0058CA02 /* TabView.swift */,
+				C27A59602A67721E0058CA02 /* BrowserTabView.swift */,
 				C27A59622A67721E0058CA02 /* LoadingView.swift */,
 				C27A59632A67721E0058CA02 /* WebView.swift */,
 				C2874B772A95A4C000A9F4B1 /* ErrorView.swift */,
@@ -279,10 +275,8 @@
 			);
 			name = Cycle;
 			packageProductDependencies = (
-				C27A59282A676FE90058CA02 /* HotKey */,
-				C2A4B1F62A79DEFD001334D5 /* Markdown */,
-				C2A4B1F92A79DF26001334D5 /* Highlighter */,
-				C2CD96F62A81BCB900EA1141 /* Sparkle */,
+				C2F970D92C713A5700433E8D /* Sparkle */,
+				C2F970DC2C713A6200433E8D /* HotKey */,
 			);
 			productName = scigic;
 			productReference = C27A59132A676FBA0058CA02 /* Cycle.app */;
@@ -313,10 +307,8 @@
 			);
 			mainGroup = C27A590A2A676FBA0058CA02;
 			packageReferences = (
-				C27A59272A676FE90058CA02 /* XCRemoteSwiftPackageReference "HotKey" */,
-				C2A4B1F52A79DEFD001334D5 /* XCRemoteSwiftPackageReference "swift-markdown" */,
-				C2A4B1F82A79DF26001334D5 /* XCRemoteSwiftPackageReference "HighlighterSwift" */,
-				C2CD96F52A81BCB900EA1141 /* XCRemoteSwiftPackageReference "Sparkle" */,
+				C2F970D82C713A5700433E8D /* XCRemoteSwiftPackageReference "Sparkle" */,
+				C2F970DB2C713A6200433E8D /* XCRemoteSwiftPackageReference "HotKey" */,
 			);
 			productRefGroup = C27A59142A676FBA0058CA02 /* Products */;
 			projectDirPath = "";
@@ -364,7 +356,7 @@
 				C27A597B2A6772C80058CA02 /* ShortcutViewModel.swift in Sources */,
 				C27A594A2A6771E80058CA02 /* URLButton.swift in Sources */,
 				C2A4B1FC2A79E038001334D5 /* MarkdownAttributedStringParser.swift in Sources */,
-				C27A59652A67721F0058CA02 /* TabView.swift in Sources */,
+				C27A59652A67721F0058CA02 /* BrowserTabView.swift in Sources */,
 				C27A597D2A6772C80058CA02 /* TabManagerViewModel.swift in Sources */,
 				C27A597C2A6772C80058CA02 /* ContextViewModel.swift in Sources */,
 				C27A59762A6772B50058CA02 /* RoundedCornersShape.swift in Sources */,
@@ -420,6 +412,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/cycle/cycle.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -483,6 +477,8 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "$(SRCROOT)/cycle/cycle.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -511,17 +507,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = scigic/scigic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = cycle/cycle.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N93T88Q42V;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Scigic/Info.plist;
+				INFOPLIST_FILE = Cycle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Cycle;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -533,9 +531,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = ai.constitute.cyclebrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -546,17 +545,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = scigic/scigic.entitlements;
+				CODE_SIGN_ENTITLEMENTS = cycle/cycle.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 15;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "";
 				DEVELOPMENT_TEAM = N93T88Q42V;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = Scigic/Info.plist;
+				INFOPLIST_FILE = Cycle/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Cycle;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -568,9 +569,10 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.0;
-				MARKETING_VERSION = 2.0.2;
+				MARKETING_VERSION = 2.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = ai.constitute.cyclebrowser;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -600,7 +602,15 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C27A59272A676FE90058CA02 /* XCRemoteSwiftPackageReference "HotKey" */ = {
+		C2F970D82C713A5700433E8D /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.4;
+			};
+		};
+		C2F970DB2C713A6200433E8D /* XCRemoteSwiftPackageReference "HotKey" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/soffes/HotKey";
 			requirement = {
@@ -608,52 +618,18 @@
 				kind = branch;
 			};
 		};
-		C2A4B1F52A79DEFD001334D5 /* XCRemoteSwiftPackageReference "swift-markdown" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/apple/swift-markdown";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.2.0;
-			};
-		};
-		C2A4B1F82A79DF26001334D5 /* XCRemoteSwiftPackageReference "HighlighterSwift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/smittytone/HighlighterSwift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.0.0;
-			};
-		};
-		C2CD96F52A81BCB900EA1141 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C27A59282A676FE90058CA02 /* HotKey */ = {
+		C2F970D92C713A5700433E8D /* Sparkle */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C27A59272A676FE90058CA02 /* XCRemoteSwiftPackageReference "HotKey" */;
-			productName = HotKey;
-		};
-		C2A4B1F62A79DEFD001334D5 /* Markdown */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C2A4B1F52A79DEFD001334D5 /* XCRemoteSwiftPackageReference "swift-markdown" */;
-			productName = Markdown;
-		};
-		C2A4B1F92A79DF26001334D5 /* Highlighter */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C2A4B1F82A79DF26001334D5 /* XCRemoteSwiftPackageReference "HighlighterSwift" */;
-			productName = Highlighter;
-		};
-		C2CD96F62A81BCB900EA1141 /* Sparkle */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C2CD96F52A81BCB900EA1141 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			package = C2F970D82C713A5700433E8D /* XCRemoteSwiftPackageReference "Sparkle" */;
 			productName = Sparkle;
+		};
+		C2F970DC2C713A6200433E8D /* HotKey */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2F970DB2C713A6200433E8D /* XCRemoteSwiftPackageReference "HotKey" */;
+			productName = HotKey;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

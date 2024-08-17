@@ -15,7 +15,7 @@ struct HomeView: View {
     var body: some View {
         ZStack {
             // Always show the TabView
-            TabView()
+            BrowserTabView()
             
 
             // Conditionally show the AskView

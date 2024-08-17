@@ -13,7 +13,10 @@ struct ChooseTypeOfTabView: View {
     var body: some View {
         if tab.isThinking {
             // Need to keep tabUUID here as we will need it in the error view to close tab
-            ThinkingView(errorCopyText: tab.currentUrl?.absoluteString ?? "Please try to disable and re-enable the app", tab.tabUUID)
+//            LoadingView(errorCopyText: tab.currentUrl?.absoluteString ?? "Please try to disable and re-enable the app", tab.tabUUID)
+            LoadingView(
+                        errorCopyText: tab.currentUrl?.absoluteString ?? "Please try to disable and re-enable the app",
+                        tabUUID: tab.tabUUID)
         } else if let webViewUrl = tab.url {
             WebView(url: webViewUrl)
                 .frame(maxWidth: .infinity, maxHeight: .infinity)

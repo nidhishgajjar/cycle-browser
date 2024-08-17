@@ -54,7 +54,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
             backing: .buffered, defer: false)
         mainWindow.collectionBehavior.insert(.moveToActiveSpace)
         mainWindow.center()
-        mainWindow.setFrameAutosaveName("Scigic")
+        mainWindow.setFrameAutosaveName("Cycle")
         mainWindow.contentView = NSHostingView(rootView: ContentView().environmentObject(commonContext).environmentObject(tabManager).environmentObject(autoSuggestViewModel))
         mainWindow.backgroundColor = NSColor.clear
 

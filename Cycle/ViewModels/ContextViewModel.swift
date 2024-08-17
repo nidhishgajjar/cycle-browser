@@ -4,7 +4,6 @@
 import Foundation
 import Combine
 import SwiftUI
-import Markdown
 
 
 struct IdentifiableParserResult: Identifiable {
@@ -51,15 +50,15 @@ class ContextViewModel: ObservableObject {
     }
     
     @Published var clips = [
-        Clip(url: URL(string: "https://chat.openai.com")!, tabUUID: nil),
-        Clip(url: URL(string: "https://notion.so")!, tabUUID: nil),
-        Clip(url: URL(string: "https://twitter.com")!,  tabUUID: nil),
-        Clip(url: URL(string: "https://app.slack.com/client/T06RQBSP7TM/D06S35D0R33")!, tabUUID: nil),
-        Clip(url: URL(string: "https://pinterest.com")!, tabUUID: nil),
-        Clip(url: URL(string: "https://vercel.com")!, tabUUID: nil),
-        Clip(url: URL(string: "https://youtube.com")!, tabUUID: nil),
-        Clip(url: URL(string: "https://firebase.google.com")!, tabUUID: nil),
-        Clip(url: URL(string: "https://render.com")!,  tabUUID: nil),
+        Clip(url: URL(string: "https://chatgpt.com")!, tabUUID: nil),
+        Clip(url: URL(string: "https://www.notion.so/d28964c01d1e44c3a9db08e1ade47f04")!, tabUUID: nil),
+        Clip(url: URL(string: "https://x.com")!,  tabUUID: nil),
+        Clip(url: URL(string: "https://nextui.org/docs/components/avatar")!, tabUUID: nil),
+        Clip(url: URL(string: "https://vercel.com/nidhishgajjars-projects")!, tabUUID: nil),
+        Clip(url: URL(string: "https://claude.ai")!, tabUUID: nil),
+        Clip(url: URL(string: "https://www.youtube.com/")!, tabUUID: nil),
+        Clip(url: URL(string: "https://supabase.com/dashboard/project/uapllucryvzxrgctfqyf")!, tabUUID: nil),
+        Clip(url: URL(string: "https://dashboard.render.com/")!,  tabUUID: nil),
         Clip(url: URL(string: "https://github.com/nidhishgajjar?tab=repositories")!, tabUUID: nil),
     ]
 
