@@ -11,6 +11,7 @@ import SwiftUI
 struct HomeView: View {
 //    @EnvironmentObject var authManager: AuthManager
     @EnvironmentObject var commonContext: ContextViewModel
+    @EnvironmentObject var tabManager: TabManagerViewModel
 
     var body: some View {
         ZStack {
@@ -20,7 +21,7 @@ struct HomeView: View {
 
             // Conditionally show the AskView
             if commonContext.isAskViewActive {
-                AskView()
+                AskView(tabManager:tabManager)
                     .padding(EdgeInsets(top: 0, leading: 0, bottom: 0, trailing: 39))
             }
         }
@@ -33,7 +34,6 @@ struct HomeView: View {
             self.commonContext.isAskViewActive = false
             self.commonContext.askTextFromPalette = ""
             self.commonContext.askBarFocusedOnAGI.toggle()
-            self.commonContext.isPopVisible = false
         })
     }
 }

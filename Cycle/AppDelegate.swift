@@ -25,9 +25,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     override init() {
 //        authManager = AuthManager()
         commonContext = ContextViewModel()
-        autoSuggestViewModel = AutoSuggestViewModel()
         
         self.tabManager = TabManagerViewModel(context: commonContext)
+        autoSuggestViewModel = AutoSuggestViewModel(tabManager: self.tabManager)
         
         
         

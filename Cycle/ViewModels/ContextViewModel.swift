@@ -28,12 +28,6 @@ class ContextViewModel: ObservableObject {
 
 
     
-//  PopViewStates
-    @Published var isPopVisible: Bool = false
-    @Published var isJobsPopActive: Bool = false
-    @Published var isNotificationsPopActive: Bool = false
-    @Published var isHistoryPopActive: Bool = false
-    
 //  TabView States
     @Published var currentTab: Bool = false
     @Published var shouldMoveCurrentTabToLast = false

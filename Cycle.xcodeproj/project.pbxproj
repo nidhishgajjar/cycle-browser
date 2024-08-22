@@ -46,8 +46,8 @@
 		C2A4B1FC2A79E038001334D5 /* MarkdownAttributedStringParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4B1FB2A79E038001334D5 /* MarkdownAttributedStringParser.swift */; };
 		C2A4B1FE2A79E309001334D5 /* ParserResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4B1FD2A79E309001334D5 /* ParserResult.swift */; };
 		C2A4B2022A79E61F001334D5 /* CodeBlockView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C2A4B2012A79E61F001334D5 /* CodeBlockView.swift */; };
-		C2F970DA2C713A5700433E8D /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = C2F970D92C713A5700433E8D /* Sparkle */; };
-		C2F970DD2C713A6200433E8D /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = C2F970DC2C713A6200433E8D /* HotKey */; };
+		C2F51A552C76B0530019AD81 /* HotKey in Frameworks */ = {isa = PBXBuildFile; productRef = C2F51A542C76B0530019AD81 /* HotKey */; };
+		C2F51A582C76B0600019AD81 /* Sparkle in Frameworks */ = {isa = PBXBuildFile; productRef = C2F51A572C76B0600019AD81 /* Sparkle */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -99,8 +99,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C2F970DD2C713A6200433E8D /* HotKey in Frameworks */,
-				C2F970DA2C713A5700433E8D /* Sparkle in Frameworks */,
+				C2F51A552C76B0530019AD81 /* HotKey in Frameworks */,
+				C2F51A582C76B0600019AD81 /* Sparkle in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,8 +275,8 @@
 			);
 			name = Cycle;
 			packageProductDependencies = (
-				C2F970D92C713A5700433E8D /* Sparkle */,
-				C2F970DC2C713A6200433E8D /* HotKey */,
+				C2F51A542C76B0530019AD81 /* HotKey */,
+				C2F51A572C76B0600019AD81 /* Sparkle */,
 			);
 			productName = scigic;
 			productReference = C27A59132A676FBA0058CA02 /* Cycle.app */;
@@ -307,8 +307,8 @@
 			);
 			mainGroup = C27A590A2A676FBA0058CA02;
 			packageReferences = (
-				C2F970D82C713A5700433E8D /* XCRemoteSwiftPackageReference "Sparkle" */,
-				C2F970DB2C713A6200433E8D /* XCRemoteSwiftPackageReference "HotKey" */,
+				C2F51A532C76B0530019AD81 /* XCRemoteSwiftPackageReference "HotKey" */,
+				C2F51A562C76B0600019AD81 /* XCRemoteSwiftPackageReference "Sparkle" */,
 			);
 			productRefGroup = C27A59142A676FBA0058CA02 /* Products */;
 			projectDirPath = "";
@@ -602,15 +602,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		C2F970D82C713A5700433E8D /* XCRemoteSwiftPackageReference "Sparkle" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/sparkle-project/Sparkle";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.6.4;
-			};
-		};
-		C2F970DB2C713A6200433E8D /* XCRemoteSwiftPackageReference "HotKey" */ = {
+		C2F51A532C76B0530019AD81 /* XCRemoteSwiftPackageReference "HotKey" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/soffes/HotKey";
 			requirement = {
@@ -618,18 +610,26 @@
 				kind = branch;
 			};
 		};
+		C2F51A562C76B0600019AD81 /* XCRemoteSwiftPackageReference "Sparkle" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sparkle-project/Sparkle";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.6.4;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		C2F970D92C713A5700433E8D /* Sparkle */ = {
+		C2F51A542C76B0530019AD81 /* HotKey */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C2F970D82C713A5700433E8D /* XCRemoteSwiftPackageReference "Sparkle" */;
-			productName = Sparkle;
-		};
-		C2F970DC2C713A6200433E8D /* HotKey */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = C2F970DB2C713A6200433E8D /* XCRemoteSwiftPackageReference "HotKey" */;
+			package = C2F51A532C76B0530019AD81 /* XCRemoteSwiftPackageReference "HotKey" */;
 			productName = HotKey;
+		};
+		C2F51A572C76B0600019AD81 /* Sparkle */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C2F51A562C76B0600019AD81 /* XCRemoteSwiftPackageReference "Sparkle" */;
+			productName = Sparkle;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
