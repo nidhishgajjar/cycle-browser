@@ -60,7 +60,7 @@ struct AutoSuggestView: View {
                     .frame(minWidth: geometry.size.width)
                 }
                 .frame(height: CGFloat(autoComplete.suggestions.count) * textHeight * 1.23)
-                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(colorScheme == .dark ? Color.clear : Color.white))
+                .background(RoundedRectangle(cornerRadius: 10, style: .continuous).fill(colorScheme == .dark ? Color.black.opacity(0.1) : Color.white))
             }
             Spacer()
         }

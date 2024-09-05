@@ -52,7 +52,7 @@ class ContextViewModel: ObservableObject {
         Clip(url: URL(string: "https://claude.ai")!, tabUUID: nil),
         Clip(url: URL(string: "https://www.youtube.com/")!, tabUUID: nil),
         Clip(url: URL(string: "https://supabase.com/dashboard/project/uapllucryvzxrgctfqyf")!, tabUUID: nil),
-        Clip(url: URL(string: "https://dashboard.render.com/")!,  tabUUID: nil),
+        Clip(url: URL(string: "https://web.whatsapp.com/")!,  tabUUID: nil),
         Clip(url: URL(string: "https://github.com/nidhishgajjar?tab=repositories")!, tabUUID: nil),
     ]
 

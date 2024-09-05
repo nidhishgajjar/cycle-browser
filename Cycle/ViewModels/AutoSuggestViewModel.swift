@@ -27,50 +27,54 @@ class AutoSuggestViewModel: ObservableObject, GoogleAutocompleteServiceDelegate 
     }
 
     private func prepareFinalSuggestions(_ suggestions: [String], for query: String) {
-        var finalSuggestions: [SuggestionItem] = []
-        
-        // Handle URL and search suggestions first
-        let urlSuggestions = suggestions.filter { $0.hasPrefix("https") }.prefix(2)
-        let regularSuggestions = suggestions.filter { !$0.hasPrefix("http") }
+           var finalSuggestions: [SuggestionItem] = []
+           
+           // Separate URL and search suggestions
+           let urlSuggestions = suggestions.filter { $0.hasPrefix("http") || $0.hasPrefix("www.") }
+           let searchSuggestions = suggestions.filter { !$0.hasPrefix("http") && !$0.hasPrefix("www.") }
 
-        finalSuggestions.append(contentsOf: urlSuggestions.map { SuggestionItem(text: $0, type: .url) })
-        finalSuggestions.append(contentsOf: regularSuggestions.map { SuggestionItem(text: $0, type: .search) })
+           // Take top 5 search suggestions and reverse their order
+           let topSearchSuggestions = Array(searchSuggestions.prefix(5)).reversed()
+           finalSuggestions.append(contentsOf: topSearchSuggestions.map { SuggestionItem(text: $0, type: .search) })
 
-        // Limit URL and search suggestions to 6 (leaving room for 1 tab suggestion)
-        finalSuggestions = Array(finalSuggestions.prefix(6))
+           // Add URL suggestion only if available
+           if let firstUrlSuggestion = urlSuggestions.first {
+               let urlSuggestion = SuggestionItem(text: firstUrlSuggestion, type: .url)
+               finalSuggestions.append(urlSuggestion)
+           }
 
-        // Now handle tab suggestions
-        if let tabs = tabManager?.tabs {
-            print("Found \(tabs.count) tabs in TabManager") // Debug
-            let matchingTabs = tabs.filter { tab in
-                if let url = tab.url?.absoluteString.lowercased() {
-                    let query = query.lowercased()
-                    return url.contains(query)
-                }
-                return false
-            }
+           // Now handle tab suggestions
+           if let tabs = tabManager?.tabs {
+               print("Found \(tabs.count) tabs in TabManager") // Debug
+               let matchingTabs = tabs.filter { tab in
+                   if let url = tab.url?.absoluteString.lowercased() {
+                       let query = query.lowercased()
+                       return url.contains(query)
+                   }
+                   return false
+               }
 
-            print("Found \(matchingTabs.count) matching tabs") // Debug
+               print("Found \(matchingTabs.count) matching tabs") // Debug
 
-            if let firstMatchingTab = matchingTabs.first {
-                // Attempt to get the title from the web view
-                let title = getTitleForTab(firstMatchingTab)
-                let tabSuggestion = SuggestionItem(
-                    text: title,
-                    type: .tab,
-                    tabUUID: firstMatchingTab.tabUUID
-                )
-                finalSuggestions.append(tabSuggestion)
-                print("Added 1 tab suggestion: \(tabSuggestion.text)") // Debug
-            }
-        }
+               if let firstMatchingTab = matchingTabs.first {
+                   // Attempt to get the title from the web view
+                   let title = getTitleForTab(firstMatchingTab)
+                   let tabSuggestion = SuggestionItem(
+                       text: title,
+                       type: .tab,
+                       tabUUID: firstMatchingTab.tabUUID
+                   )
+                   finalSuggestions.append(tabSuggestion)
+                   print("Added 1 tab suggestion: \(tabSuggestion.text)") // Debug
+               }
+           }
 
-        print("Prepared \(finalSuggestions.count) final suggestions") // Debug
-        
-        DispatchQueue.main.async {
-            self.suggestions = finalSuggestions
-        }
-    }
+           print("Prepared \(finalSuggestions.count) final suggestions") // Debug
+           
+           DispatchQueue.main.async {
+               self.suggestions = finalSuggestions
+           }
+       }
     
     private func getTitleForTab(_ tab: TabManagerViewModel.Tab) -> String {
         // This method attempts to get the title from the web view
